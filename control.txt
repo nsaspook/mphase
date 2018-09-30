@@ -1,0 +1,35 @@
+
+-->
+-->VEDR
+ERR CMD ERR [VEDR]
+-->VER
+V6.68 DRIVE Rev create.d Jan 31 17:58:57 2007
+-->DIS
+-->MSG 2
+-->MPOLES 0
+-->MPHASE 90
+ERR CMD ERR [MPHASE]
+-->MPHASE 90
+-->OPMODE 2
+-->EN
+-->T 35
+-->PFB
+268958 92.340
+-->DIS
+-->
+booting...
+-->MPHASE 28
+-->MSG 0
+-->MNUMBER 0
+-->SAVE
+-->MPHASE
+ERR CMD ERR [MPHASE]
+-->MPHASE
+28
+-->MPOLES
+24
+-->MSG
+0
+-->OPMODE
+3
+-->
