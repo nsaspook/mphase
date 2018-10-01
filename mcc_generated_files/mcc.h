@@ -52,9 +52,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "interrupt_manager.h"
+#include "spi.h"
+#include "tmr1.h"
 #include "tmr0.h"
-#include "eusart1.h"
 #include "eusart2.h"
+#include "eusart1.h"
 
 
 

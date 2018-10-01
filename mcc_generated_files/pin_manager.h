@@ -129,6 +129,39 @@
 #define IO_RA5_SetAnalogMode()      do { ANCON0bits.ANSEL4 = 1; } while(0)
 #define IO_RA5_SetDigitalMode()     do { ANCON0bits.ANSEL4 = 0; } while(0)
 
+// get/set SCK aliases
+#define SCK_TRIS                 TRISCbits.TRISC3
+#define SCK_LAT                  LATCbits.LATC3
+#define SCK_PORT                 PORTCbits.RC3
+#define SCK_SetHigh()            do { LATCbits.LATC3 = 1; } while(0)
+#define SCK_SetLow()             do { LATCbits.LATC3 = 0; } while(0)
+#define SCK_Toggle()             do { LATCbits.LATC3 = ~LATCbits.LATC3; } while(0)
+#define SCK_GetValue()           PORTCbits.RC3
+#define SCK_SetDigitalInput()    do { TRISCbits.TRISC3 = 1; } while(0)
+#define SCK_SetDigitalOutput()   do { TRISCbits.TRISC3 = 0; } while(0)
+
+// get/set SDI aliases
+#define SDI_TRIS                 TRISCbits.TRISC4
+#define SDI_LAT                  LATCbits.LATC4
+#define SDI_PORT                 PORTCbits.RC4
+#define SDI_SetHigh()            do { LATCbits.LATC4 = 1; } while(0)
+#define SDI_SetLow()             do { LATCbits.LATC4 = 0; } while(0)
+#define SDI_Toggle()             do { LATCbits.LATC4 = ~LATCbits.LATC4; } while(0)
+#define SDI_GetValue()           PORTCbits.RC4
+#define SDI_SetDigitalInput()    do { TRISCbits.TRISC4 = 1; } while(0)
+#define SDI_SetDigitalOutput()   do { TRISCbits.TRISC4 = 0; } while(0)
+
+// get/set SDO aliases
+#define SDO_TRIS                 TRISCbits.TRISC5
+#define SDO_LAT                  LATCbits.LATC5
+#define SDO_PORT                 PORTCbits.RC5
+#define SDO_SetHigh()            do { LATCbits.LATC5 = 1; } while(0)
+#define SDO_SetLow()             do { LATCbits.LATC5 = 0; } while(0)
+#define SDO_Toggle()             do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0)
+#define SDO_GetValue()           PORTCbits.RC5
+#define SDO_SetDigitalInput()    do { TRISCbits.TRISC5 = 1; } while(0)
+#define SDO_SetDigitalOutput()   do { TRISCbits.TRISC5 = 0; } while(0)
+
 // get/set RC6 procedures
 #define RC6_SetHigh()            do { LATCbits.LATC6 = 1; } while(0)
 #define RC6_SetLow()             do { LATCbits.LATC6 = 0; } while(0)

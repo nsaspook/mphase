@@ -1,11 +1,11 @@
 /**
-  Generated Interrupt Manager Source File
+  Generated Interrupt Manager Header File
 
   @Company:
     Microchip Technology Inc.
 
   @File Name:
-    interrupt_manager.c
+    interrupt_manager.h
 
   @Summary:
     This is the Interrupt Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
@@ -17,7 +17,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
         Device            :  PIC18F45K80
-        Driver Version    :  2.03
+        Driver Version    :  2.12
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.45 or later
         MPLAB 	          :  MPLAB X 4.15
@@ -51,40 +51,68 @@
 
 void  INTERRUPT_Initialize (void)
 {
-    // Disable Interrupt Priority Vectors (16CXXX Compatibility Mode)
-    RCONbits.IPEN = 0;
+    // Enable Interrupt Priority Vectors
+    RCONbits.IPEN = 1;
+
+    // Assign peripheral interrupt priority vectors
+
+    // TMRI - high priority
+    INTCON2bits.TMR0IP = 1;
+
+    // TXI - high priority
+    IPR3bits.TX2IP = 1;
+
+    // RCI - high priority
+    IPR3bits.RC2IP = 1;
+
+    // TXI - high priority
+    IPR1bits.TX1IP = 1;
+
+    // RCI - high priority
+    IPR1bits.RC1IP = 1;
+
+
+    // TMRI - low priority
+    IPR1bits.TMR1IP = 0;    
+
 }
 
-void __interrupt() INTERRUPT_InterruptManager (void)
+void __interrupt() INTERRUPT_InterruptManagerHigh (void)
 {
-    // interrupt handler
+   // interrupt handler
     if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
     {
         TMR0_ISR();
     }
-    else if(INTCONbits.PEIE == 1)
+    else if(PIE3bits.TX2IE == 1 && PIR3bits.TX2IF == 1)
     {
-        if(PIE3bits.TX2IE == 1 && PIR3bits.TX2IF == 1)
-        {
-            EUSART2_TxDefaultInterruptHandler();
-        } 
-        else if(PIE3bits.RC2IE == 1 && PIR3bits.RC2IF == 1)
-        {
-            EUSART2_RxDefaultInterruptHandler();
-        } 
-        else if(PIE1bits.TX1IE == 1 && PIR1bits.TX1IF == 1)
-        {
-            EUSART1_TxDefaultInterruptHandler();
-        } 
-        else if(PIE1bits.RC1IE == 1 && PIR1bits.RC1IF == 1)
-        {
-            EUSART1_RxDefaultInterruptHandler();
-        } 
-        else
-        {
-            //Unhandled Interrupt
-        }
-    }      
+        EUSART2_TxDefaultInterruptHandler();
+    }
+    else if(PIE3bits.RC2IE == 1 && PIR3bits.RC2IF == 1)
+    {
+        EUSART2_RxDefaultInterruptHandler();
+    }
+    else if(PIE1bits.TX1IE == 1 && PIR1bits.TX1IF == 1)
+    {
+        EUSART1_TxDefaultInterruptHandler();
+    }
+    else if(PIE1bits.RC1IE == 1 && PIR1bits.RC1IF == 1)
+    {
+        EUSART1_RxDefaultInterruptHandler();
+    }
+    else
+    {
+        //Unhandled Interrupt
+    }
+}
+
+void __interrupt(low_priority) INTERRUPT_InterruptManagerLow (void)
+{
+    // interrupt handler
+    if(PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF == 1)
+    {
+        TMR1_ISR();
+    }
     else
     {
         //Unhandled Interrupt
