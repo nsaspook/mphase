@@ -91,10 +91,10 @@ void EUSART2_Initialize(void)
     TXSTA2 = 0x26;
 
     // 
-    SPBRG2 = 0x11;
+    SPBRG2 = 0x82;
 
     // 
-    SPBRGH2 = 0x04;
+    SPBRGH2 = 0x06;
 
 
     // initializing the driver state

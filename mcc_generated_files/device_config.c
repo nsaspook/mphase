@@ -53,8 +53,8 @@
 #pragma config XINST = OFF    // Extended Instruction Set->Disabled
 
 // CONFIG1H
-#pragma config FOSC = EC3    // Oscillator->EC oscillator (High power, 16 MHz - 64 MHz)
-#pragma config PLLCFG = ON    // PLL x4 Enable bit->Enabled
+#pragma config FOSC = INTIO1    // Oscillator->Internal RC oscillator, CLKOUT function on OSC2
+#pragma config PLLCFG = OFF    // PLL x4 Enable bit->Disabled
 #pragma config FCMEN = OFF    // Fail-Safe Clock Monitor->Disabled
 #pragma config IESO = OFF    // Internal External Oscillator Switch Over Mode->Disabled
 

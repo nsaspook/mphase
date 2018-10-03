@@ -129,6 +129,14 @@
 #define IO_RA5_SetAnalogMode()      do { ANCON0bits.ANSEL4 = 1; } while(0)
 #define IO_RA5_SetDigitalMode()     do { ANCON0bits.ANSEL4 = 0; } while(0)
 
+// get/set RA6 procedures
+#define RA6_SetHigh()            do { LATAbits.LATA6 = 1; } while(0)
+#define RA6_SetLow()             do { LATAbits.LATA6 = 0; } while(0)
+#define RA6_Toggle()             do { LATAbits.LATA6 = ~LATAbits.LATA6; } while(0)
+#define RA6_GetValue()              PORTAbits.RA6
+#define RA6_SetDigitalInput()    do { TRISAbits.TRISA6 = 1; } while(0)
+#define RA6_SetDigitalOutput()   do { TRISAbits.TRISA6 = 0; } while(0)
+
 // get/set SCK aliases
 #define SCK_TRIS                 TRISCbits.TRISC3
 #define SCK_LAT                  LATCbits.LATC3

@@ -62,12 +62,12 @@ void SYSTEM_Initialize(void)
 
 void OSCILLATOR_Initialize(void)
 {
-    // SCS FOSC; HFIOFS not stable; IDLEN disabled; IRCF 8MHz_HF; 
-    OSCCON = 0x60;
+    // SCS FOSC; HFIOFS not stable; IDLEN disabled; IRCF 16MHz_HF; 
+    OSCCON = 0x70;
     // SOSCGO disabled; MFIOSEL disabled; SOSCDRV Low Power; 
     OSCCON2 = 0x00;
-    // INTSRC INTRC; PLLEN disabled; TUN 0; 
-    OSCTUNE = 0x00;
+    // INTSRC INTRC; PLLEN enabled; TUN 0; 
+    OSCTUNE = 0x40;
     // ROSEL System Clock(FOSC); ROON disabled; ROSSLP Disabled in Sleep mode; RODIV Fosc; 
     REFOCON = 0x00;
 }

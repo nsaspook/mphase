@@ -91,10 +91,10 @@ void EUSART1_Initialize(void)
     TXSTA1 = 0x24;
 
     // 
-    SPBRG1 = 0x11;
+    SPBRG1 = 0x82;
 
     // 
-    SPBRGH1 = 0x04;
+    SPBRGH1 = 0x06;
 
 
     // initializing the driver state
