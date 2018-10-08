@@ -83,7 +83,7 @@ void main(void)
 		IO_RA0_Toggle();
 		if (delay_w++ > 13000) {
 			if (EUSART2_is_tx_ready() > 16)
-				printf("Fred Brooks implant\r\n");
+				printf("Microchip Tech MCHP\r\n");
 			delay_w = 0;
 		}
 	}
