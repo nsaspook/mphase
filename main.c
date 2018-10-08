@@ -13,10 +13,10 @@
   Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
-        Device            :  PIC18F45K80
-        Driver Version    :  2.00
-*/
+	Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
+	Device            :  PIC18F45K80
+	Driver Version    :  2.00
+ */
 
 /*
     (c) 2018 Microchip Technology Inc. and its subsidiaries. 
@@ -39,47 +39,55 @@
     CLAIMS IN ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT 
     OF FEES, IF ANY, THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS 
     SOFTWARE.
-*/
+ */
 
 #include "mcc_generated_files/mcc.h"
+#include <stdio.h>
 
 /*
-                         Main application
+			 Main application
  */
 void main(void)
 {
-    // Initialize the device
-    SYSTEM_Initialize();
-    PIN_MANAGER_IOC();
+	int32_t delay_w = 0;
+	// Initialize the device
+	SYSTEM_Initialize();
+	PIN_MANAGER_IOC();
 
-    // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
-    // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts
-    // Use the following macros to:
+	// If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
+	// If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts
+	// Use the following macros to:
 
-    // Enable high priority global interrupts
-    //INTERRUPT_GlobalInterruptHighEnable();
+	// Enable high priority global interrupts
+	INTERRUPT_GlobalInterruptHighEnable();
 
-    // Enable low priority global interrupts.
-    //INTERRUPT_GlobalInterruptLowEnable();
+	// Enable low priority global interrupts.
+	INTERRUPT_GlobalInterruptLowEnable();
 
-    // Disable high priority global interrupts
-    //INTERRUPT_GlobalInterruptHighDisable();
+	// Disable high priority global interrupts
+	//INTERRUPT_GlobalInterruptHighDisable();
 
-    // Disable low priority global interrupts.
-    //INTERRUPT_GlobalInterruptLowDisable();
+	// Disable low priority global interrupts.
+	//INTERRUPT_GlobalInterruptLowDisable();
 
-    // Enable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptEnable();
+	// Enable the Peripheral Interrupts
+	INTERRUPT_PeripheralInterruptEnable();
 
-    // Disable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptDisable();
+	// Disable the Peripheral Interrupts
+	//INTERRUPT_PeripheralInterruptDisable();
 
-    while (1)
-    {
-        // Add your application code
-	    IO_RA0_Toggle();
-    }
+
+	printf("Fred Brooks\r\n");
+	while (1) {
+		// Add your application code
+		IO_RA0_Toggle();
+		if (delay_w++ > 13000) {
+			if (EUSART2_is_tx_ready() > 16)
+				printf("Fred Brooks implant\r\n");
+			delay_w = 0;
+		}
+	}
 }
 /**
  End of File
-*/
+ */
