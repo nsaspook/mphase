@@ -43,6 +43,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include <stdio.h>
+#include "app.h"
 
 /*
 			 Main application
@@ -76,6 +77,7 @@ void main(void)
 	// Disable the Peripheral Interrupts
 	//INTERRUPT_PeripheralInterruptDisable();
 
+	APP_Initialize();
 
 	printf("Fred Brooks\r\n");
 	while (1) {
@@ -86,6 +88,7 @@ void main(void)
 				printf("Microchip Tech MCHP\r\n");
 			delay_w = 0;
 		}
+		APP_Tasks();
 	}
 }
 /**
