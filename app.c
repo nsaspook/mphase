@@ -8,6 +8,7 @@
 #include "config.h"
 #include "timers.h"
 #include "mcc_generated_files/tmr1.h"
+#include "board/ea_display.h"
 
 APP_DATA appData;
 
@@ -50,11 +51,21 @@ bool APP_Initialize(void)
 
 void APP_Tasks(void)
 {
+	IO_RA3_Toggle();
+	if (TimerDone(TMR_LEDS)) {
+		SLED ^= 1;
+		StartTimer(TMR_LEDS, LED_BLINK_MS);
+	}
+	
 	switch (appData.state) {
 		//Initial state
 	case APP_INITIALIZE:
 		if (APP_Initialize()) {
-			appData.state = APP_BLUETOOTH_ADVERTISE;
+			appData.state = APP_CONNECT;
+			display_ea_init(500);
+			display_ea_ff(1);
+			display_ea_version(1000);
+			StartTimer(TMR_DIS, DIS_REFRESH_MS);
 		} else {
 			appData.state = APP_INITIALIZATION_ERROR;
 		}
@@ -62,13 +73,11 @@ void APP_Tasks(void)
 		//Initialization failed
 	case APP_INITIALIZATION_ERROR:
 		break;
-		//We're not connected to a device - advertise mode
-	case APP_BLUETOOTH_ADVERTISE:
-		appData.state = APP_BLUETOOTH_PAIRED;
+	case APP_CONNECT:
+		appData.state = APP_COMMUNICATE;
 		break;
-		//We are connected to a BTLE device
-	case APP_BLUETOOTH_PAIRED:
-		appData.state = APP_BLUETOOTH_ADVERTISE;
+	case APP_COMMUNICATE:
+		appData.state = APP_CONNECT;
 		break;
 	default:
 		break;

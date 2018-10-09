@@ -18,8 +18,8 @@
 typedef enum {
     APP_INITIALIZE = 0, // Initialize application
     APP_INITIALIZATION_ERROR, // Initialization Error
-    APP_BLUETOOTH_ADVERTISE, // Advertise the bluetooth connection, not connected
-    APP_BLUETOOTH_PAIRED, // Bluetooth module is paired to server, we idle
+    APP_CONNECT, 
+    APP_COMMUNICATE,
     APP_SLEEP // Sleep mode
 } APP_STATE_T;
 

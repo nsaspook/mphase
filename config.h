@@ -12,7 +12,7 @@
 #define BT_TX_PKT_SZ    64               //Max transmit packet length
 
 #define DEBOUNCE_MS         75          //debounce time for switches 1 - 4
-#define ADC_REFRESH_MS      10          //delay between ADC reads
+#define DIS_REFRESH_MS      30          //delay between display updates
 #define POT_TX_MS           50         //delay between transmitting new pot values
 #define LED_BLINK_MS        900         //LED blink rate for advertise mode
 #define BT_TX_MS            10         //minimum time between consecutive BTLE message transmissions

@@ -13,7 +13,7 @@ enum APP_TIMERS {
     TMR_INTERNAL = 0, //Used in timers.c - do not remove or use elsewhere
     TMR_LEDS,
     TMR_RN_COMMS,
-    TMR_ADC,
+    TMR_DIS,
     TMR_POT,
     TMR_SW1_DEBOUNCE,
     TMR_SW2_DEBOUNCE,
@@ -28,7 +28,6 @@ enum APP_TIMERS {
     TMR_COUNT //number of timers - always keep at end of enum!
 };
 
-void Timers_Init(void);
 inline void StartTimer(uint8_t timer, uint16_t count);
 inline bool TimerDone(uint8_t timer);
 void WaitMs(uint16_t numMilliseconds);

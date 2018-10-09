@@ -10,14 +10,6 @@ extern APP_DATA appData;
 static volatile uint16_t tickCount[TMR_COUNT] = {0};
 
 //**********************************************************************************************************************
-// Initialize the timers
-
-void Timers_Init(void)
-{
-	//Timer 1 is used for interrupt based software timers counting 1ms intervals to a resolution of 500us
-}
-
-//**********************************************************************************************************************
 // Start one of the software timers
 
 inline void StartTimer(uint8_t timer, uint16_t count)
@@ -60,6 +52,6 @@ void _T1Interrupt(void)
 			tickCount[i]--;
 		}
 	}
-	IO_RA0_Toggle();
+	IO_RA1_Toggle();
 }
 

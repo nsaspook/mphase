@@ -44,6 +44,8 @@
 #include "mcc_generated_files/mcc.h"
 #include <stdio.h>
 #include "app.h"
+#include "config.h"
+#include "board/ea_display.h"
 
 /*
 			 Main application
@@ -77,17 +79,15 @@ void main(void)
 	// Disable the Peripheral Interrupts
 	//INTERRUPT_PeripheralInterruptDisable();
 
-	APP_Initialize();
 
-	printf("Fred Brooks\r\n");
 	while (1) {
-		// Add your application code
-		if (delay_w++ > 13000) {
-			if (EUSART2_is_tx_ready() > 16)
-				printf("Microchip Tech MCHP\r\n");
-			delay_w = 0;
-		}
 		APP_Tasks();
+		// Add your application code
+		if (TimerDone(TMR_DIS)) {
+			IO_RA2_Toggle();
+			display_ea_line("Microchip Tech MCHP\r\n");
+			StartTimer(TMR_DIS, DIS_REFRESH_MS);
+		}
 	}
 }
 /**
