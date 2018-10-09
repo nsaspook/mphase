@@ -43,7 +43,7 @@ void WaitMs(uint16_t numMilliseconds)
 {
 	StartTimer(TMR_INTERNAL, numMilliseconds); //Start software timer and wait for it to count down
 	while (!TimerDone(TMR_INTERNAL)) {
-//		Idle();
+		//		Idle();
 	} //Enter idle mode to reduce power while waiting
 } //(timer interrupt will wake part from idle)
 
@@ -60,5 +60,6 @@ void _T1Interrupt(void)
 			tickCount[i]--;
 		}
 	}
+	IO_RA0_Toggle();
 }
 

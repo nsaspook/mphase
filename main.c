@@ -82,7 +82,6 @@ void main(void)
 	printf("Fred Brooks\r\n");
 	while (1) {
 		// Add your application code
-		IO_RA0_Toggle();
 		if (delay_w++ > 13000) {
 			if (EUSART2_is_tx_ready() > 16)
 				printf("Microchip Tech MCHP\r\n");
