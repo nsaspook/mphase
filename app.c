@@ -66,7 +66,7 @@ void APP_Tasks(void)
 		break;
 	case APP_CONNECT:
 		appData.state = APP_COMMUNICATE;
-		if (MC_ReceivePacket(appData.receive_packet)) {
+		if (MC_ReceivePacket(appData.receive_packet)) { // received data from controller
 			BUZZER_ON;
 			appData.got_packet = false;
 			if (strstr(appData.receive_packet, "booting...")) {
@@ -88,7 +88,7 @@ void APP_Tasks(void)
 		if (TimerDone(TMR_DIS)) {
 			IO_RA2_Toggle();
 			if (appData.got_packet) {
-				sprintf(mc_response, "%s\r\n", appData.receive_packet);
+				sprintf(mc_response, "\eO\x01\x01%s\r\n", appData.receive_packet);
 				display_ea_line(mc_response);
 				switch (appData.mc) {
 					//Initial state
