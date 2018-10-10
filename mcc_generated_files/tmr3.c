@@ -33,7 +33,7 @@
     EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY 
     IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS 
     FOR A PARTICULAR PURPOSE.
-    
+    :0:: error: (500) undefined symbols:
     IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
     INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
     WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP 
@@ -50,6 +50,7 @@
 
 #include <xc.h>
 #include "tmr3.h"
+#include "pin_manager.h"
 
 /**
   Section: Global Variables Definitions
@@ -172,7 +173,7 @@ void TMR3_DefaultInterruptHandler(void)
 {
 	// add your TMR3 interrupt custom code
 	// or set custom function using TMR3_SetInterruptHandler()
-//	IO_RA5_Toggle();
+	IO_RA5_Toggle();
 }
 
 /**

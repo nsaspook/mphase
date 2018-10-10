@@ -22,6 +22,7 @@
       <itemPath>app.h</itemPath>
       <itemPath>config.h</itemPath>
       <itemPath>timers.h</itemPath>
+      <itemPath>board/ea_display.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -53,6 +54,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>timers.c</itemPath>
       <itemPath>app.c</itemPath>
+      <itemPath>board/ea_display.c</itemPath>
     </logicalFolder>
     <logicalFolder name="f2" displayName="wiring" projectFiles="true">
       <logicalFolder name="board" displayName="board" projectFiles="true">

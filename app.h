@@ -15,6 +15,10 @@
 #define ERROR_INITIALIZATION    -2
 #define ERROR_RN_FW             -3
 
+enum BluetoothDecodeState {
+	WaitForCR, WaitForLF
+};
+
 typedef enum {
     APP_INITIALIZE = 0, // Initialize application
     APP_INITIALIZATION_ERROR, // Initialization Error
@@ -47,5 +51,7 @@ typedef struct {
 
 void APP_Tasks(void);
 //bool APP_Initialize(void);
+bool MC_ReceivePacket(char *message);
+bool MC_GetResponse(char *data);
 
 #endif //APP_H
