@@ -10,33 +10,19 @@
 #include "mcc_generated_files/tmr1.h"
 #include "board/ea_display.h"
 
-APP_DATA appData;
+APP_DATA appData= {
+	.error_code=ERROR_NONE,
+	.got_packet=false,
+	.state=APP_INITIALIZE,
+	.update_packet=false
+};
 
-bool APP_Initialize(void)
+static bool APP_Initialize(void)
 {
 	/****************************************************************************
 	 * Initialize appData structure
 	 ***************************************************************************/
-	appData.error_code = ERROR_NONE;
-	appData.got_packet = false;
 
-	appData.state = APP_INITIALIZE;
-	appData.sw1 = false;
-	appData.sw2 = false;
-	appData.sw3 = false;
-	appData.sw4 = false;
-	appData.led1 = 0;
-	appData.led2 = 0;
-	appData.led3 = 0;
-	appData.led4 = 0;
-	appData.led5 = 0;
-	appData.led6 = 0;
-	appData.update_packet = true;
-	appData.sw1Changed = false;
-	appData.sw2Changed = false;
-	appData.sw3Changed = false;
-	appData.sw4Changed = false;
-	appData.timer1Flag = false;
 
 	/****************************************************************************
 	 * Peripherals Init
@@ -56,7 +42,7 @@ void APP_Tasks(void)
 		SLED ^= 1;
 		StartTimer(TMR_LEDS, LED_BLINK_MS);
 	}
-	
+
 	switch (appData.state) {
 		//Initial state
 	case APP_INITIALIZE:
@@ -78,6 +64,11 @@ void APP_Tasks(void)
 		break;
 	case APP_COMMUNICATE:
 		appData.state = APP_CONNECT;
+		if (TimerDone(TMR_DIS)) {
+			IO_RA2_Toggle();
+			display_ea_line("Microchip Tech MCHP\r\n");
+			StartTimer(TMR_DIS, DIS_REFRESH_MS);
+		}
 		break;
 	default:
 		break;

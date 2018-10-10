@@ -46,6 +46,6 @@ typedef struct {
 } APP_DATA;
 
 void APP_Tasks(void);
-bool APP_Initialize(void);
+//bool APP_Initialize(void);
 
 #endif //APP_H

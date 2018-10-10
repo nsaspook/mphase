@@ -42,17 +42,14 @@
  */
 
 #include "mcc_generated_files/mcc.h"
-#include <stdio.h>
 #include "app.h"
 #include "config.h"
-#include "board/ea_display.h"
 
 /*
 			 Main application
  */
 void main(void)
 {
-	int32_t delay_w = 0;
 	// Initialize the device
 	SYSTEM_Initialize();
 	PIN_MANAGER_IOC();
@@ -83,11 +80,6 @@ void main(void)
 	while (1) {
 		APP_Tasks();
 		// Add your application code
-		if (TimerDone(TMR_DIS)) {
-			IO_RA2_Toggle();
-			display_ea_line("Microchip Tech MCHP\r\n");
-			StartTimer(TMR_DIS, DIS_REFRESH_MS);
-		}
 	}
 }
 /**
