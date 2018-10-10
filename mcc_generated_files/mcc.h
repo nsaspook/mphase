@@ -53,6 +53,7 @@
 #include <stdbool.h>
 #include "interrupt_manager.h"
 #include "spi.h"
+#include "tmr3.h"
 #include "tmr1.h"
 #include "tmr0.h"
 #include "eusart2.h"
