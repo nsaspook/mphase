@@ -15,6 +15,7 @@ APP_DATA appData = {
 	.error_code = ERROR_NONE,
 	.got_packet = false,
 	.state = APP_INITIALIZE,
+	.mc = MC_INITIALIZE,
 	.update_packet = false
 };
 
@@ -67,7 +68,19 @@ void APP_Tasks(void)
 		appData.state = APP_COMMUNICATE;
 		if (MC_ReceivePacket(appData.receive_packet)) {
 			BUZZER_ON;
-			appData.got_packet = true;
+			appData.got_packet = false;
+			if (strstr(appData.receive_packet, "booting...")) {
+				appData.mc = MC_BOOT;
+				appData.got_packet = true;
+			}
+			if (strstr(appData.receive_packet, "Drive 70")) {
+				if (appData.mc == MC_BOOT) {
+					appData.mc = MC_DRIVE;
+				} else {
+					appData.mc = MC_INITIALIZE;
+				}
+				appData.got_packet = true;
+			}
 		}
 		break;
 	case APP_COMMUNICATE:
@@ -77,6 +90,20 @@ void APP_Tasks(void)
 			if (appData.got_packet) {
 				sprintf(mc_response, "%s\r\n", appData.receive_packet);
 				display_ea_line(mc_response);
+				switch (appData.mc) {
+					//Initial state
+				case MC_INITIALIZE:
+					display_ea_line("Reboot SPIN AMP\r\n");
+					break;
+				case MC_BOOT:
+					MC_SendCommand("HVER\r\n", false);
+					break;
+				case MC_DRIVE:
+					MC_SendCommand("MPHASE\r\n", false);
+					break;
+				default:
+					break;
+				}
 			} else {
 				display_ea_line("Microchip Tech MCHP\r\n");
 			}
@@ -148,6 +175,24 @@ bool MC_GetResponse(char *data)
 		}
 		if (TimerDone(TMR_RN_COMMS)) //Check if timed out
 			return false; //If timed out then return failure
+	}
+	return false;
+}
+
+bool MC_SendCommand(const char *data, bool wait)
+{
+	uint16_t i;
+	//Only transmit a message if TX timer expired, or wait flag is set to false
+	//We limit transmission frequency to avoid overwhelming the link
+	if (TimerDone(TMR_MC_TX) || wait == false) {
+		for (i = 0; i < SIZE_TxBuffer; i++) {
+			if (*data != '\0') //Keep loading bytes until end of string
+				EUSART1_Write(*data++); //Load byte into the transmit buffer
+			else
+				break;
+		}
+		StartTimer(TMR_MC_TX, BT_TX_MS); //Restart transmit timer
+		return true;
 	}
 	return false;
 }

@@ -20,38 +20,37 @@ enum BluetoothDecodeState {
 };
 
 typedef enum {
-    APP_INITIALIZE = 0, // Initialize application
-    APP_INITIALIZATION_ERROR, // Initialization Error
-    APP_CONNECT, 
-    APP_COMMUNICATE,
-    APP_SLEEP // Sleep mode
+	APP_INITIALIZE = 0, // Initialize application
+	APP_INITIALIZATION_ERROR, // Initialization Error
+	APP_CONNECT,
+	APP_COMMUNICATE,
+	APP_SLEEP // Sleep mode
 } APP_STATE_T;
 
+typedef enum {
+	MC_INITIALIZE = 0, // Initialize application
+	MC_INITIALIZATION_ERROR, // Initialization Error
+	MC_BOOT,
+	MC_DRIVE,
+	MC_COMMUNICATE,
+} MC_STATE_T;
+
 typedef struct {
-    APP_STATE_T state; //APP_Tasks state
-    char receive_packet[BT_RX_PKT_SZ]; //message buffers
-    char transmit_packet[BT_TX_PKT_SZ];
-    bool got_packet, //new packet flag
-    update_packet,
-    sendSwitches, //new switch states ready to send
-    ADCcalFlag, //ADC is calibrated if true
-    led1, led2, led3, led4, led5, led6, //LED states
-    oled1, oled2, oled3, oled4;
-    int8_t error_code;
-    volatile bool sw1, sw2, sw3, sw4, //switch states
-    sw1Changed, sw2Changed, sw3Changed, sw4Changed, //switch state has changed
-    RTCCalarm, //RTCC alarm has tripped
-    accumReady, //ADC accumulator is done
-    ADCinUse, //ADC or accumulator register is currently in use
-    timer1Flag, //Timer1 has tripped
-    CNint, //CN interrupt has tripped (flag to exit sleep)
-    sleepFlag; //sleep mode triggered
-    uint16_t potValue, potValueOld, potValueLastTX, version_code; //potentiometer values - current, previous, and last transmitted, firmware version
+	APP_STATE_T state; //APP_Tasks state
+	MC_STATE_T mc; // servo controller state
+	char receive_packet[BT_RX_PKT_SZ]; //message buffers
+	char transmit_packet[BT_TX_PKT_SZ];
+	bool got_packet, //new packet flag
+	update_packet;
+	int8_t error_code;
+	volatile bool sw1, sw2, sw3, sw4, //switch states
+	sw1Changed, sw2Changed, sw3Changed, sw4Changed; //switch state has changed
+	uint32_t version_code; // firmware version
 } APP_DATA;
 
 void APP_Tasks(void);
-//bool APP_Initialize(void);
 bool MC_ReceivePacket(char *message);
 bool MC_GetResponse(char *data);
+bool MC_SendCommand(const char *, bool);
 
 #endif //APP_H

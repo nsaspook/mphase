@@ -19,7 +19,7 @@ enum APP_TIMERS {
     TMR_SW2_DEBOUNCE,
     TMR_SW3_DEBOUNCE,
     TMR_SW4_DEBOUNCE,
-    TMR_BT_TX,
+    TMR_MC_TX,
     TMR_BAT_CHECK,
     TMR_SPI,
     //
