@@ -160,25 +160,30 @@ void TMR0_SetInterruptHandler(void (* InterruptHandler)(void))
 	TMR0_InterruptHandler = InterruptHandler;
 }
 
+// switch pressed time delays
 void TMR0_DefaultInterruptHandler(void)
 {
 	// add your TMR0 interrupt custom code
 	// or set custom function using TMR0_SetInterruptHandler()
 
-	if (!appData.sw1) {
-		appData.sw1Changed = false;
+	if (appData.sw1Changed) {
+		if (!(--appData.sw1Changed))
+			appData.sw1 = false;
 	}
 
-	if (!appData.sw2) {
-		appData.sw2Changed = false;
+	if (appData.sw2Changed) {
+		if (!(--appData.sw2Changed))
+			appData.sw2 = false;
 	}
 
-	if (!appData.sw3) {
-		appData.sw3Changed = false;
+	if (appData.sw3Changed) {
+		if (!(--appData.sw3Changed))
+			appData.sw3 = false;
 	}
 
-	if (!appData.sw4) {
-		appData.sw4Changed = false;
+	if (appData.sw4Changed) {
+		if (!(--appData.sw4Changed))
+			appData.sw4 = false;
 	}
 }
 

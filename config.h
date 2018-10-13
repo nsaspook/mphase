@@ -21,4 +21,7 @@
 #define BUZZER_OFF	TMR3_StopTimer()
 #define BUZZER_ON	TMR3_StartTimer()
 
+#define SW_D_S		2
+#define SW_D_L		6
+
 #endif //CONFIG_H

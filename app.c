@@ -7,6 +7,7 @@
 #include "app.h"
 #include "config.h"
 #include "timers.h"
+#include "mcc_generated_files/tmr0.h"
 #include "mcc_generated_files/tmr1.h"
 #include "board/ea_display.h"
 #include "mcc_generated_files/eusart1.h"
@@ -21,10 +22,10 @@ APP_DATA appData = {
 	.sw2=false,
 	.sw3=false,
 	.sw4=false,
-	.sw1Changed=false,
-	.sw2Changed=false,
-	.sw3Changed=false,
-	.sw4Changed=false,
+	.sw1Changed=0,
+	.sw2Changed=0,
+	.sw3Changed=0,
+	.sw4Changed=0,
 };
 
 static bool APP_Initialize(void)

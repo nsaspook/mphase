@@ -43,8 +43,8 @@ typedef struct {
 	bool got_packet, //new packet flag
 	update_packet;
 	int8_t error_code;
-	volatile bool sw1, sw2, sw3, sw4, //switch states
-	sw1Changed, sw2Changed, sw3Changed, sw4Changed; //switch state has changed
+	volatile bool sw1, sw2, sw3, sw4; //switch states
+	uint8_t sw1Changed, sw2Changed, sw3Changed, sw4Changed; //switch state has changed
 	uint32_t version_code; // firmware version
 } APP_DATA;
 
