@@ -53,6 +53,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "../app.h"
 
 #ifdef __cplusplus  // Provide C++ Compatibility
 
@@ -193,7 +194,7 @@ void TMR0_StopTimer(void);
     }
     </code>
 */
-uint8_t TMR0_ReadTimer(void);
+uint16_t TMR0_ReadTimer(void);
 
 /**
   @Summary
@@ -232,7 +233,7 @@ uint8_t TMR0_ReadTimer(void);
     }
     </code>
 */
-void TMR0_WriteTimer(uint8_t timerVal);
+void TMR0_WriteTimer(uint16_t timerVal);
 
 /**
   @Summary

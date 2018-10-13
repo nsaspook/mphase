@@ -52,5 +52,6 @@ void APP_Tasks(void);
 bool MC_ReceivePacket(char *message);
 bool MC_GetResponse(char *data);
 bool MC_SendCommand(const char *, bool);
+void clear_MC_port(void);
 
 #endif //APP_H

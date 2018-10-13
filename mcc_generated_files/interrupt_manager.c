@@ -59,6 +59,17 @@ void  INTERRUPT_Initialize (void)
     // TMRI - high priority
     INTCON2bits.TMR0IP = 1;
 
+    // Interrupt INT0I has no priority bit. It will always be called from the High Interrupt Vector
+
+    // INT3I - high priority
+    INTCON2bits.INT3IP = 1;
+
+    // INT1I - high priority
+    INTCON3bits.INT1IP = 1;
+
+    // INT2I - high priority
+    INTCON3bits.INT2IP = 1;
+
     // TXI - high priority
     IPR3bits.TX2IP = 1;
 
@@ -86,6 +97,22 @@ void __interrupt() INTERRUPT_InterruptManagerHigh (void)
     if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
     {
         TMR0_ISR();
+    }
+    else if(INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1)
+    {
+        INT0_ISR();
+    }
+    else if(INTCON3bits.INT3IE == 1 && INTCON3bits.INT3IF == 1)
+    {
+        INT3_ISR();
+    }
+    else if(INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1)
+    {
+        INT1_ISR();
+    }
+    else if(INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1)
+    {
+        INT2_ISR();
     }
     else if(PIE3bits.TX2IE == 1 && PIR3bits.TX2IF == 1)
     {

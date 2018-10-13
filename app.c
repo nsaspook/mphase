@@ -16,23 +16,41 @@ APP_DATA appData = {
 	.got_packet = false,
 	.state = APP_INITIALIZE,
 	.mc = MC_INITIALIZE,
-	.update_packet = false
+	.update_packet = false,
+	.sw1=false,
+	.sw2=false,
+	.sw3=false,
+	.sw4=false,
+	.sw1Changed=false,
+	.sw2Changed=false,
+	.sw3Changed=false,
+	.sw4Changed=false,
 };
 
 static bool APP_Initialize(void)
 {
-	/****************************************************************************
-	 * Initialize appData structure
-	 ***************************************************************************/
-
-
-	/****************************************************************************
-	 * Peripherals Init
-	 ***************************************************************************/
 	TMR1_StartTimer();
+	TMR0_StartTimer();
 
 	SLED = 1; // init completed
 	return true;
+}
+
+// dump serial buffer and clean possible lockup flags
+void clear_MC_port(void)
+{
+	while (EUSART1_is_rx_ready()) { //While buffer contains old data
+		EUSART1_Read(); //Keep reading until empty
+		if (!EUSART1_is_rx_ready()) {
+			WaitMs(1);
+		}
+	}
+	//Clear any UART error bits
+	if (1 == RCSTA1bits.OERR) {
+		// EUSART1 error - restart
+		RCSTA1bits.CREN = 0;
+		RCSTA1bits.CREN = 1;
+	}
 }
 
 //Primary application state machine
@@ -69,11 +87,11 @@ void APP_Tasks(void)
 		if (MC_ReceivePacket(appData.receive_packet)) { // received data from controller
 			BUZZER_ON;
 			appData.got_packet = false;
-			if (strstr(appData.receive_packet, "booting...")) {
+			if (strstr(appData.receive_packet, "booting...")) { // power restart
 				appData.mc = MC_BOOT;
 				appData.got_packet = true;
 			}
-			if (strstr(appData.receive_packet, "Drive 70")) {
+			if (strstr(appData.receive_packet, "Drive 70")) { // hardware version
 				if (appData.mc == MC_BOOT) {
 					appData.mc = MC_DRIVE;
 				} else {
@@ -96,9 +114,11 @@ void APP_Tasks(void)
 					display_ea_line("Reboot SPIN AMP\r\n");
 					break;
 				case MC_BOOT:
+					clear_MC_port();
 					MC_SendCommand("HVER\r\n", false);
 					break;
 				case MC_DRIVE:
+					clear_MC_port();
 					MC_SendCommand("MPHASE\r\n", false);
 					break;
 				default:

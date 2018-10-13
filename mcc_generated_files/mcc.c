@@ -56,6 +56,7 @@ void SYSTEM_Initialize(void)
     SPI_Initialize();
     TMR3_Initialize();
     TMR1_Initialize();
+    EXT_INT_Initialize();
     TMR0_Initialize();
     EUSART1_Initialize();
     EUSART2_Initialize();
