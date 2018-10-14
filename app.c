@@ -18,14 +18,14 @@ APP_DATA appData = {
 	.state = APP_INITIALIZE,
 	.mc = MC_INITIALIZE,
 	.update_packet = false,
-	.sw1=false,
-	.sw2=false,
-	.sw3=false,
-	.sw4=false,
-	.sw1Changed=0,
-	.sw2Changed=0,
-	.sw3Changed=0,
-	.sw4Changed=0,
+	.sw1 = false,
+	.sw2 = false,
+	.sw3 = false,
+	.sw4 = false,
+	.sw1Changed = 0,
+	.sw2Changed = 0,
+	.sw3Changed = 0,
+	.sw4Changed = 0,
 };
 
 static bool APP_Initialize(void)
@@ -38,6 +38,7 @@ static bool APP_Initialize(void)
 }
 
 // dump serial buffer and clean possible lockup flags
+
 void clear_MC_port(void)
 {
 	while (EUSART1_is_rx_ready()) { //While buffer contains old data
@@ -59,6 +60,7 @@ void clear_MC_port(void)
 void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
+	static uint16_t i = 0;
 
 	if (TimerDone(TMR_LEDS)) {
 		SLED ^= 1;
@@ -126,6 +128,16 @@ void APP_Tasks(void)
 					break;
 				}
 			} else {
+				if (appData.sw1) {
+					BUZZER_ON;
+					appData.sw1 = false;
+					WaitMs(100);
+				}
+				if (appData.sw2) {
+					BUZZER_ON;
+					appData.sw2 = false;
+					WaitMs(25);
+				}
 				display_ea_line("Microchip Tech MCHP\r\n");
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);

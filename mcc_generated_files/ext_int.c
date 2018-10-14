@@ -60,7 +60,6 @@ void INT0_DefaultInterruptHandler(void)
 {
 	// add your INT0 interrupt custom code
 	// or set custom function using INT0_SetInterruptHandler()
-	appData.sw1 = true;
 	appData.sw1Changed = SW_D_S;
 }
 
@@ -89,8 +88,7 @@ void INT1_DefaultInterruptHandler(void)
 {
 	// add your INT1 interrupt custom code
 	// or set custom function using INT1_SetInterruptHandler()
-	appData.sw2 = true;
-	appData.sw2Changed = SW_D_S;
+	appData.sw2Changed = SW_D_L;
 }
 
 void INT2_ISR(void)
@@ -118,7 +116,6 @@ void INT2_DefaultInterruptHandler(void)
 {
 	// add your INT2 interrupt custom code
 	// or set custom function using INT2_SetInterruptHandler()
-	appData.sw3 = true;
 	appData.sw3Changed = SW_D_S;
 }
 
@@ -147,7 +144,6 @@ void INT3_DefaultInterruptHandler(void)
 {
 	// add your INT3 interrupt custom code
 	// or set custom function using INT3_SetInterruptHandler()
-	appData.sw4 = true;
 	appData.sw4Changed = SW_D_S;
 }
 

@@ -168,22 +168,22 @@ void TMR0_DefaultInterruptHandler(void)
 
 	if (appData.sw1Changed) {
 		if (!(--appData.sw1Changed))
-			appData.sw1 = false;
+			appData.sw1 = true;
 	}
 
 	if (appData.sw2Changed) {
 		if (!(--appData.sw2Changed))
-			appData.sw2 = false;
+			appData.sw2 = true;
 	}
 
 	if (appData.sw3Changed) {
 		if (!(--appData.sw3Changed))
-			appData.sw3 = false;
+			appData.sw3 = true;
 	}
 
 	if (appData.sw4Changed) {
 		if (!(--appData.sw4Changed))
-			appData.sw4 = false;
+			appData.sw4 = true;
 	}
 }
 
