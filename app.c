@@ -46,6 +46,8 @@ static const struct CR_DATA CrData[] = {
 		.r1 = "booting...",
 		.c2 = "HVER\r\n",
 		.r2 = "Drive 70",
+		.c3 = "MPOLES\r\n",
+		.r3 = "24",
 		.error = "Reboot SPIN AMP\r\n",
 		.s1 = "Clear Error         ",
 		.s2 = "FLIP UP             ",
@@ -120,6 +122,7 @@ void APP_Tasks(void)
 	case APP_CONNECT:
 		appData.state = APP_COMMUNICATE;
 		if (MC_ReceivePacket(appData.receive_packet)) { // received data from controller
+			clear_MC_port();
 			BUZZER_ON;
 			appData.got_packet = false;
 			if (strstr(appData.receive_packet, cr_text->cmd)) { // command prompt
@@ -137,7 +140,12 @@ void APP_Tasks(void)
 				}
 				appData.got_packet = true;
 			}
-			if (appData.mc == MC_SETUP) {
+			if (strstr(appData.receive_packet, cr_text->r3)) { // motor poles
+				if (appData.mc == MC_DRIVE) {
+					appData.mc = MC_SETUP;
+				} else {
+					appData.mc = MC_INITIALIZE;
+				}
 				appData.got_packet = true;
 			}
 		}
@@ -161,8 +169,7 @@ void APP_Tasks(void)
 					break;
 				case MC_DRIVE:
 					clear_MC_port();
-					MC_SendCommand("MPHASE\r\n", false);
-					appData.mc = MC_SETUP;
+					MC_SendCommand(cr_text->c3, false);
 					break;
 				case MC_SETUP:
 					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s1);

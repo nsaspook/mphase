@@ -35,6 +35,7 @@ typedef enum {
 	MC_COMMUNICATE,
 	MC_SETUP,
 	MC_CMD,
+	MC_WAIT,
 } MC_STATE_T;
 
 typedef struct {
