@@ -126,13 +126,15 @@ void APP_Tasks(void)
 				default:
 					break;
 				}
+				appData.got_packet = false;
 			} else {
 				if (appData.sw1) {
 					BUZZER_ON;
 					appData.sw1 = false;
 					WaitMs(100);
 				}
-				display_ea_line("Microchip Tech MCHP\r\n");
+				sprintf(mc_response, "\eO\x01\x04%s\r\n", "Microchip Tech MCHP\r\n");
+				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
 		}
@@ -189,30 +191,6 @@ bool MC_ReceivePacket(char * Message)
 		default: //Invalid state so start looking for a new start of frame
 			btDecodeState = WaitForCR;
 		}
-	}
-	return false;
-}
-
-bool MC_GetResponse(char *data)
-{
-	uint16_t byteCount = 0;
-	char newByte;
-
-	StartTimer(TMR_RN_COMMS, 600); //Start 600ms timeout for routine
-
-	while (byteCount < BT_RX_PKT_SZ) //Don't accept more than the buffer size
-	{
-		if (EUSART1_is_rx_ready()) //Check if new data byte from BT module and return if nothing new
-		{
-			IO_RA3_Toggle();
-			newByte = EUSART1_Read(); //Read the data byte for processing
-			*data++ = newByte; //Add it to the buffer
-			byteCount++; //Keep track of the number of bytes received
-			if (newByte == '\n') //Check if got linefeed
-				return true; //If linefeed then return success
-		}
-		if (TimerDone(TMR_RN_COMMS)) //Check if timed out
-			return false; //If timed out then return failure
 	}
 	return false;
 }
