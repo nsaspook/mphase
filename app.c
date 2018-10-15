@@ -34,6 +34,7 @@ struct CR_DATA {
 	*c2, *r2,
 	*c3, *r3,
 	*s1, *s2, *s3,
+	*w1, *w2, *w3,
 	*error;
 };
 
@@ -50,6 +51,7 @@ static const struct CR_DATA CrData[] = {
 		.r3 = "24",
 		.error = "Reboot SPIN AMP\r\n",
 		.s1 = "Clear Error         ",
+		.w1 = "Spin Motor SCREEN   ",
 		.s2 = "FLIP UP             ",
 		.s3 = "Power Cycle Spin AMP",
 	},
@@ -174,6 +176,8 @@ void APP_Tasks(void)
 				case MC_SETUP:
 					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s1);
 					display_ea_line(mc_response);
+					sprintf(mc_response, "\eO\x01\x03%s", cr_text->w1);
+					display_ea_line(mc_response);
 					break;
 				default:
 					break;
@@ -185,7 +189,7 @@ void APP_Tasks(void)
 					appData.sw1 = false;
 					WaitMs(100);
 				}
-				sprintf(mc_response, "\eO\x01\x03%s", cr_text->headder);
+				sprintf(mc_response, "\eO\x01\x04%s", cr_text->headder);
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
