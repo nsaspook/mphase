@@ -60,7 +60,6 @@ void clear_MC_port(void)
 void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
-	static uint16_t i = 0;
 
 	if (TimerDone(TMR_LEDS)) {
 		SLED ^= 1;
@@ -133,20 +132,26 @@ void APP_Tasks(void)
 					appData.sw1 = false;
 					WaitMs(100);
 				}
-				if (appData.sw2) {
-					BUZZER_ON;
-					appData.sw2 = false;
-					WaitMs(25);
-				}
 				display_ea_line("Microchip Tech MCHP\r\n");
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
-			BUZZER_OFF;
 		}
 		break;
 	default:
 		break;
 	} //end switch(appData.state)
+	
+	// start programming sequence without MC 'booting'
+	if (appData.sw2) {
+		BUZZER_ON;
+		appData.sw2 = false;
+		appData.mc = MC_BOOT;
+		appData.got_packet = true;
+		display_ea_ff(1);
+		sprintf(appData.receive_packet,"Boot Button Pressed\r\n");
+		WaitMs(25);
+	}
+	BUZZER_OFF;
 } //end APP_Tasks()
 
 bool MC_ReceivePacket(char * Message)
