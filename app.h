@@ -34,6 +34,7 @@ typedef enum {
 	MC_DRIVE,
 	MC_COMMUNICATE,
 	MC_SETUP,
+	MC_CMD,
 } MC_STATE_T;
 
 typedef struct {

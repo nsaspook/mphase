@@ -29,7 +29,7 @@ APP_DATA appData = {
 };
 
 struct CR_DATA {
-	const char *headder, *bootb,
+	const char *headder, *bootb, *cmd,
 	*c1, *r1,
 	*c2, *r2,
 	*c3, *r3,
@@ -41,6 +41,7 @@ static const struct CR_DATA CrData[] = {
 	{
 		.headder = "Microchip Tech MCHP ",
 		.bootb = "Boot Button Pressed ",
+		.cmd = "-->",
 		.c1 = "booting...",
 		.r1 = "booting...",
 		.c2 = "HVER\r\n",
@@ -121,6 +122,9 @@ void APP_Tasks(void)
 		if (MC_ReceivePacket(appData.receive_packet)) { // received data from controller
 			BUZZER_ON;
 			appData.got_packet = false;
+			if (strstr(appData.receive_packet, cr_text->cmd)) { // command prompt
+				strcpy(appData.receive_packet, "");
+			}
 			if (strstr(appData.receive_packet, cr_text->r1)) { // power restart
 				appData.mc = MC_BOOT;
 				appData.got_packet = true;
@@ -161,7 +165,7 @@ void APP_Tasks(void)
 					appData.mc = MC_SETUP;
 					break;
 				case MC_SETUP:
-					sprintf(mc_response, "\eO\x01\x02%s", cr_text->error);
+					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s1);
 					display_ea_line(mc_response);
 					break;
 				default:
