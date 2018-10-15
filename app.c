@@ -28,6 +28,29 @@ APP_DATA appData = {
 	.sw4Changed = 0,
 };
 
+struct CR_DATA {
+	const char *headder,
+	*c1, *r1,
+	*c2, *r2,
+	*c3, *r3;
+};
+
+static const struct CR_DATA CrData[] = {
+	{
+		.headder = "Microchip Tech MCHP\r\n",
+		.c1 = "booting...",
+		.r1 = "booting...",
+		.c2 = "HVER\r\n",
+		.r2 = "Drive 70",
+	},
+	{
+		.headder = "Microchip Tech MCHP\r\n",
+		.c1 = "booting"
+	}
+};
+
+static const struct CR_DATA *cr_text = &CrData[MC_SS600];
+
 static bool APP_Initialize(void)
 {
 	TMR1_StartTimer();
@@ -89,11 +112,11 @@ void APP_Tasks(void)
 		if (MC_ReceivePacket(appData.receive_packet)) { // received data from controller
 			BUZZER_ON;
 			appData.got_packet = false;
-			if (strstr(appData.receive_packet, "booting...")) { // power restart
+			if (strstr(appData.receive_packet, cr_text->r1)) { // power restart
 				appData.mc = MC_BOOT;
 				appData.got_packet = true;
 			}
-			if (strstr(appData.receive_packet, "Drive 70")) { // hardware version
+			if (strstr(appData.receive_packet, cr_text->r2)) { // hardware version
 				if (appData.mc == MC_BOOT) {
 					appData.mc = MC_DRIVE;
 				} else {
@@ -133,7 +156,7 @@ void APP_Tasks(void)
 					appData.sw1 = false;
 					WaitMs(100);
 				}
-				sprintf(mc_response, "\eO\x01\x04%s\r\n", "Microchip Tech MCHP\r\n");
+				sprintf(mc_response, "\eO\x01\x04%s\r\n", cr_text->headder);
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
@@ -142,7 +165,7 @@ void APP_Tasks(void)
 	default:
 		break;
 	} //end switch(appData.state)
-	
+
 	// start programming sequence without MC 'booting'
 	if (appData.sw2) {
 		BUZZER_ON;
@@ -150,7 +173,7 @@ void APP_Tasks(void)
 		appData.mc = MC_BOOT;
 		appData.got_packet = true;
 		display_ea_ff(1);
-		sprintf(appData.receive_packet,"Boot Button Pressed\r\n");
+		sprintf(appData.receive_packet, "Boot Button Pressed\r\n");
 		WaitMs(25);
 	}
 	BUZZER_OFF;

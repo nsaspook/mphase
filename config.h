@@ -24,4 +24,6 @@
 #define SW_D_S		2
 #define SW_D_L		6
 
+#define MC_SS600	0
+
 #endif //CONFIG_H
