@@ -29,23 +29,32 @@ APP_DATA appData = {
 };
 
 struct CR_DATA {
-	const char *headder,
+	const char *headder, *bootb,
 	*c1, *r1,
 	*c2, *r2,
-	*c3, *r3;
+	*c3, *r3,
+	*s1, *s2, *s3,
+	*error;
 };
 
 static const struct CR_DATA CrData[] = {
 	{
-		.headder = "Microchip Tech MCHP\r\n",
+		.headder = "Microchip Tech MCHP ",
+		.bootb = "Boot Button Pressed ",
 		.c1 = "booting...",
 		.r1 = "booting...",
 		.c2 = "HVER\r\n",
 		.r2 = "Drive 70",
+		.error = "Reboot SPIN AMP\r\n",
+		.s1 = "Clear Error         ",
+		.s2 = "FLIP UP             ",
+		.s3 = "Power Cycle Spin AMP",
 	},
 	{
-		.headder = "Microchip Tech MCHP\r\n",
-		.c1 = "booting"
+		.headder = "Microchip Tech MCHP ",
+		.bootb = "Boot Button Pressed ",
+		.c1 = "booting",
+		.error = "Reboot SPIN AMP\r\n",
 	}
 };
 
@@ -124,6 +133,9 @@ void APP_Tasks(void)
 				}
 				appData.got_packet = true;
 			}
+			if (appData.mc == MC_SETUP) {
+				appData.got_packet = true;
+			}
 		}
 		break;
 	case APP_COMMUNICATE:
@@ -136,15 +148,21 @@ void APP_Tasks(void)
 				switch (appData.mc) {
 					//Initial state
 				case MC_INITIALIZE:
-					display_ea_line("Reboot SPIN AMP\r\n");
+					sprintf(mc_response, "\eO\x01\x02%s", cr_text->error);
+					display_ea_line(mc_response);
 					break;
 				case MC_BOOT:
 					clear_MC_port();
-					MC_SendCommand("HVER\r\n", false);
+					MC_SendCommand(cr_text->c2, false);
 					break;
 				case MC_DRIVE:
 					clear_MC_port();
 					MC_SendCommand("MPHASE\r\n", false);
+					appData.mc = MC_SETUP;
+					break;
+				case MC_SETUP:
+					sprintf(mc_response, "\eO\x01\x02%s", cr_text->error);
+					display_ea_line(mc_response);
 					break;
 				default:
 					break;
@@ -156,7 +174,7 @@ void APP_Tasks(void)
 					appData.sw1 = false;
 					WaitMs(100);
 				}
-				sprintf(mc_response, "\eO\x01\x04%s\r\n", cr_text->headder);
+				sprintf(mc_response, "\eO\x01\x03%s", cr_text->headder);
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
@@ -173,7 +191,7 @@ void APP_Tasks(void)
 		appData.mc = MC_BOOT;
 		appData.got_packet = true;
 		display_ea_ff(1);
-		sprintf(appData.receive_packet, "Boot Button Pressed\r\n");
+		sprintf(appData.receive_packet, cr_text->bootb);
 		WaitMs(25);
 	}
 	BUZZER_OFF;
