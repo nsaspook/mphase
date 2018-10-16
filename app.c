@@ -35,6 +35,7 @@ struct CR_DATA {
 	*c3, *r3,
 	*s1, *s2, *s3,
 	*w1, *w2, *w3,
+	*angle, *diskmove,
 	*dis, *msg2, *mpoles0, *mphase90, *opmode2,
 	*en, *t35, *pfb,
 	*msg0, *mnumber0, *save_parm,
@@ -55,6 +56,8 @@ static const struct CR_DATA CrData[] = {
 		.r2 = "Drive 70",
 		.c3 = "MPOLES\r\n",
 		.r3 = "24",
+		.angle = ".",
+		.diskmove = "Wait, disk moving   ",
 		.error = "Reboot SPIN AMP\r\n",
 		.s1 = "Press Clear Error on",
 		.w1 = "Spin Motor SCREEN   ",
@@ -72,7 +75,7 @@ static const struct CR_DATA CrData[] = {
 		.pfb = "PFB\r\n",
 		.msg0 = "MSG 0\r\n",
 		.mnumber0 = "MNUMBER 0\r\n",
-		.save_parm = "NOSAVE\r\n",
+		.save_parm = "XXXXX\r\n",
 	},
 	{
 		.headder = "Microchip Tech MCHP ",
@@ -116,6 +119,8 @@ void clear_MC_port(void)
 void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
+	uint16_t mphase;
+
 
 	if (TimerDone(TMR_LEDS)) {
 		SLED ^= 1;
@@ -195,6 +200,7 @@ void APP_Tasks(void)
 					MC_SendCommand(cr_text->c3, false);
 					break;
 				case MC_SETUP:
+					BUZZER_OFF;
 					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s2);
 					display_ea_line(mc_response);
 					sprintf(mc_response, "\eO\x01\x03%s", cr_text->w2);
@@ -206,6 +212,7 @@ void APP_Tasks(void)
 					BUZZER_ON;
 					appData.sw1 = false;
 					WaitMs(100);
+					BUZZER_OFF;
 
 					clear_MC_port();
 					MC_SendCommand(cr_text->dis, true);
@@ -225,11 +232,27 @@ void APP_Tasks(void)
 					BUZZER_ON;
 					appData.sw1 = false;
 					WaitMs(100);
+					BUZZER_OFF;
 
 					clear_MC_port();
 					MC_SendCommand(cr_text->en, true);
 					MC_SendCommand(cr_text->t35, true);
+					sprintf(mc_response, "\eO\x01\x01%s", cr_text->diskmove);
+					display_ea_line(mc_response);
+					WaitMs(2000); // wait while spin disk moves to position
+					clear_MC_port();
 					MC_SendCommand(cr_text->pfb, true);
+					WaitMs(500);
+
+					if (MC_ReceivePacket(appData.receive_packet)) { // received data from controller
+						clear_MC_port();
+						if (strstr(appData.receive_packet, cr_text->angle)) { // resolver angle data
+							mphase = 123;
+						} else
+							RESET();
+					} else
+						mphase = 500;
+
 					MC_SendCommand(cr_text->dis, true);
 
 					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s3);
@@ -243,21 +266,23 @@ void APP_Tasks(void)
 					BUZZER_ON;
 					appData.sw1 = false;
 					WaitMs(100);
+					BUZZER_OFF;
 
 					clear_MC_port();
-					sprintf(mc_response, "MPHASE %d\r\n", 123);
+					sprintf(mc_response, "MPHASE %d\r\n", mphase);
 					MC_SendCommand(mc_response, true);
 					MC_SendCommand(cr_text->msg0, true);
 					MC_SendCommand(cr_text->mnumber0, true);
 					MC_SendCommand(cr_text->save_parm, true);
 					BUZZER_ON;
 					WaitMs(100);
+					BUZZER_OFF;
 
 					appData.state = APP_DONE;
 					appData.mc = MC_DONE;
 					break;
 				case MC_DONE:
-					sprintf(mc_response, "\eO\x01\x02%s", cr_text->done);
+					sprintf(mc_response, "%s", cr_text->done);
 					display_ea_line(mc_response);
 					break;
 				default:
@@ -277,8 +302,13 @@ void APP_Tasks(void)
 		}
 		break;
 	case APP_DONE:
-		BUZZER_ON;
 		while (true) {
+			sprintf(mc_response, " MPHASE %d \r\n", mphase);
+			display_ea_line(mc_response);
+			WaitMs(100);
+			BUZZER_OFF;
+			WaitMs(50);
+			BUZZER_ON;
 		};
 		break;
 	default:
@@ -340,17 +370,16 @@ bool MC_ReceivePacket(char * Message)
 bool MC_SendCommand(const char *data, bool wait)
 {
 	uint16_t i;
-	//Only transmit a message if TX timer expired, or wait flag is set to false
-	//We limit transmission frequency to avoid overwhelming the link
-	if (TimerDone(TMR_MC_TX) || wait == false) {
-		for (i = 0; i < SIZE_TxBuffer; i++) {
-			if (*data != '\0') //Keep loading bytes until end of string
-				EUSART1_Write(*data++); //Load byte into the transmit buffer
-			else
-				break;
-		}
-		StartTimer(TMR_MC_TX, BT_TX_MS); //Restart transmit timer
-		return true;
+
+	for (i = 0; i < SIZE_TxBuffer; i++) {
+		if (*data != '\0') //Keep loading bytes until end of string
+			EUSART1_Write(*data++); //Load byte into the transmit buffer
+		else
+			break;
 	}
-	return false;
+
+	if (wait) {
+		WaitMs(100);
+	}
+	return true;
 }
