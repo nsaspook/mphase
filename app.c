@@ -119,7 +119,9 @@ void clear_MC_port(void)
 void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
-	uint16_t mphase;
+	static uint16_t mphase;
+	static uint32_t pfb, fangleH, fangleF;
+
 
 
 	if (TimerDone(TMR_LEDS)) {
@@ -239,19 +241,22 @@ void APP_Tasks(void)
 					MC_SendCommand(cr_text->t35, true);
 					sprintf(mc_response, "\eO\x01\x01%s", cr_text->diskmove);
 					display_ea_line(mc_response);
-					WaitMs(2000); // wait while spin disk moves to position
+					WaitMs(15000); // wait while spin disk moves to position
 					clear_MC_port();
 					MC_SendCommand(cr_text->pfb, true);
-					WaitMs(500);
+					WaitMs(100);
 
-					if (MC_ReceivePacket(appData.receive_packet)) { // received data from controller
-						clear_MC_port();
-						if (strstr(appData.receive_packet, cr_text->angle)) { // resolver angle data
-							mphase = 123;
-						} else
-							RESET();
+					while (!MC_ReceivePacket(appData.receive_packet)) {
+						sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
+						display_ea_line(mc_response);
+					}
+
+					clear_MC_port();
+					if (strstr(appData.receive_packet, cr_text->angle)) { // resolver angle data
+						mphase = 123;
+						//sscanf(appData.receive_packet, "%ld %ld.%ls", &pfb, &fangleH, &fangleF);
 					} else
-						mphase = 500;
+						RESET();
 
 					MC_SendCommand(cr_text->dis, true);
 
