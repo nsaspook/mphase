@@ -16,7 +16,7 @@
 #define DIS_REFRESH_MS      70          //delay between display updates
 #define POT_TX_MS           50         //delay between transmitting new pot values
 #define LED_BLINK_MS        900         //LED blink rate for advertise mode
-#define BT_TX_MS            10         //minimum time between consecutive BTLE message transmissions
+#define BT_TX_MS            100         //minimum time between consecutive BTLE message transmissions
 #define SLED        IO_RA0_LAT
 #define BUZZER_OFF	TMR3_StopTimer()
 #define BUZZER_ON	TMR3_StartTimer()

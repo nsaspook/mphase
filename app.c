@@ -29,12 +29,15 @@ APP_DATA appData = {
 };
 
 struct CR_DATA {
-	const char *headder, *bootb, *cmd,
+	const char *headder, *bootb, *cmd, *buttonp,
 	*c1, *r1,
 	*c2, *r2,
 	*c3, *r3,
 	*s1, *s2, *s3,
 	*w1, *w2, *w3,
+	*dis, *msg2, *mpoles0, *mphase90, *opmode2,
+	*en, *t35, *pfb,
+	*msg0, *mnumber0, *save_parm,
 	*error;
 };
 
@@ -43,6 +46,7 @@ static const struct CR_DATA CrData[] = {
 		.headder = "Microchip Tech MCHP ",
 		.bootb = "Boot Button Pressed ",
 		.cmd = "-->",
+		.buttonp = "When done press OK  ",
 		.c1 = "booting...",
 		.r1 = "booting...",
 		.c2 = "HVER\r\n",
@@ -55,6 +59,17 @@ static const struct CR_DATA CrData[] = {
 		.s2 = "Press FLIP UP on    ",
 		.w2 = "MID LEVEL SCREEN    ",
 		.s3 = "Power Cycle Spin AMP",
+		.dis = "DIS\r\n",
+		.msg2 = "MSG 2\r\n",
+		.mpoles0 = "MPOLES 0\r\n",
+		.mphase90 = "MPHASE 90\r\n",
+		.opmode2 = "OPMODE 2\r\n",
+		.en = "EN\r\n",
+		.t35 = "T 35\r\n",
+		.pfb = "PFB\r\n",
+		.msg0 = "MSG 0\r\n",
+		.mnumber0 = "MNUMBER 0\r\n",
+		.save_parm = "SAVE\r\n",
 	},
 	{
 		.headder = "Microchip Tech MCHP ",
@@ -177,10 +192,32 @@ void APP_Tasks(void)
 					MC_SendCommand(cr_text->c3, false);
 					break;
 				case MC_SETUP:
+					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s2);
+					display_ea_line(mc_response);
+					sprintf(mc_response, "\eO\x01\x03%s", cr_text->w2);
+					display_ea_line(mc_response);
+					while (!appData.sw1) {
+						sprintf(mc_response, "\eO\x01\x04%s", cr_text->buttonp);
+						display_ea_line(mc_response);
+					}
+					BUZZER_ON;
+					appData.sw1 = false;
+					WaitMs(100);
+
+					clear_MC_port();
+					MC_SendCommand(cr_text->c3, true);
+
 					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s1);
 					display_ea_line(mc_response);
 					sprintf(mc_response, "\eO\x01\x03%s", cr_text->w1);
 					display_ea_line(mc_response);
+					while (!appData.sw1) {
+						sprintf(mc_response, "\eO\x01\x04%s", cr_text->buttonp);
+						display_ea_line(mc_response);
+					}
+					BUZZER_ON;
+					appData.sw1 = false;
+					WaitMs(100);
 					break;
 				default:
 					break;
