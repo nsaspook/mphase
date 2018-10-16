@@ -255,8 +255,14 @@ void APP_Tasks(void)
 					if (strstr(appData.receive_packet, cr_text->angle)) { // resolver angle data
 						mphase = 123;
 						//sscanf(appData.receive_packet, "%ld %ld.%ls", &pfb, &fangleH, &fangleF);
-					} else
-						RESET();
+					} else {
+						mphase = 321;
+						MC_SendCommand(cr_text->dis, true);
+						//RESET();
+					}
+
+					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
+					display_ea_line(mc_response);
 
 					MC_SendCommand(cr_text->dis, true);
 
@@ -384,7 +390,7 @@ bool MC_SendCommand(const char *data, bool wait)
 	}
 
 	if (wait) {
-		WaitMs(100);
+		WaitMs(400);
 	}
 	return true;
 }

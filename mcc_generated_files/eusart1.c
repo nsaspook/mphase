@@ -180,7 +180,7 @@ void EUSART1_Transmit_ISR(void)
 
 void EUSART1_Receive_ISR(void)
 {
-
+	uint8_t treg;
 	if (1 == RCSTA1bits.OERR) {
 		// EUSART1 error - restart
 
@@ -189,11 +189,17 @@ void EUSART1_Receive_ISR(void)
 	}
 
 	// buffer overruns are ignored
-	eusart1RxBuffer[eusart1RxHead++] = RCREG1;
-	if (sizeof(eusart1RxBuffer) <= eusart1RxHead) {
-		eusart1RxHead = 0;
+	treg = RCREG1;
+	/*
+	 * ignore MC prompt chars
+	 */
+	if ((treg != '-') && (treg != '>')) {
+		eusart1RxBuffer[eusart1RxHead++] = treg;
+		if (sizeof(eusart1RxBuffer) <= eusart1RxHead) {
+			eusart1RxHead = 0;
+		}
+		eusart1RxCount++;
 	}
-	eusart1RxCount++;
 }
 
 void EUSART1_SetTxInterruptHandler(void (* interruptHandler)(void))
