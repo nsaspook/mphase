@@ -50,9 +50,10 @@ static const struct CR_DATA CrData[] = {
 		.c3 = "MPOLES\r\n",
 		.r3 = "24",
 		.error = "Reboot SPIN AMP\r\n",
-		.s1 = "Clear Error         ",
+		.s1 = "Press Clear Error on",
 		.w1 = "Spin Motor SCREEN   ",
-		.s2 = "FLIP UP             ",
+		.s2 = "Press FLIP UP on    ",
+		.w2 = "MID LEVEL SCREEN    ",
 		.s3 = "Power Cycle Spin AMP",
 	},
 	{
@@ -157,6 +158,8 @@ void APP_Tasks(void)
 		if (TimerDone(TMR_DIS)) {
 			IO_RA2_Toggle();
 			if (appData.got_packet) {
+				sprintf(mc_response, "\eO\x01\x01%s\r\n", "                   ");
+				display_ea_line(mc_response);
 				sprintf(mc_response, "\eO\x01\x01%s\r\n", appData.receive_packet);
 				display_ea_line(mc_response);
 				switch (appData.mc) {

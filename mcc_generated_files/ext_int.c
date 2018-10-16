@@ -61,6 +61,10 @@ void INT0_DefaultInterruptHandler(void)
 	// add your INT0 interrupt custom code
 	// or set custom function using INT0_SetInterruptHandler()
 	appData.sw1Changed = SW_D_S;
+	if (appData.sw2Changed) {
+		// reboot sequence
+		RESET();
+	}
 }
 
 void INT1_ISR(void)
