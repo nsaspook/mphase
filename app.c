@@ -390,7 +390,7 @@ bool MC_SendCommand(const char *data, bool wait)
 	}
 
 	if (wait) {
-		WaitMs(400);
+		WaitMs(200);
 	}
 	return true;
 }
