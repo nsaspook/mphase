@@ -24,7 +24,8 @@ typedef enum {
 	APP_INITIALIZATION_ERROR, // Initialization Error
 	APP_CONNECT,
 	APP_COMMUNICATE,
-	APP_SLEEP // Sleep mode
+	APP_SLEEP, // Sleep mode
+	APP_DONE,
 } APP_STATE_T;
 
 typedef enum {
@@ -36,6 +37,7 @@ typedef enum {
 	MC_SETUP,
 	MC_CMD,
 	MC_WAIT,
+	MC_DONE,
 } MC_STATE_T;
 
 typedef struct {
