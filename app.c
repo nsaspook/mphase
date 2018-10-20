@@ -12,6 +12,8 @@
 #include "board/ea_display.h"
 #include "mcc_generated_files/eusart1.h"
 
+float get_pfb(char *);
+
 APP_DATA appData = {
 	.error_code = ERROR_NONE,
 	.got_packet = false,
@@ -120,9 +122,6 @@ void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
 	static uint16_t mphase;
-	static uint32_t pfb, fangleH, fangleF;
-
-
 
 	if (TimerDone(TMR_LEDS)) {
 		SLED ^= 1;
@@ -254,7 +253,7 @@ void APP_Tasks(void)
 					clear_MC_port();
 					if (strstr(appData.receive_packet, cr_text->angle)) { // resolver angle data
 						mphase = 123;
-						//sscanf(appData.receive_packet, "%ld %ld.%ls", &pfb, &fangleH, &fangleF);
+						get_pfb(appData.receive_packet);
 					} else {
 						mphase = 321;
 						MC_SendCommand(cr_text->dis, true);
@@ -393,4 +392,30 @@ bool MC_SendCommand(const char *data, bool wait)
 		WaitMs(200);
 	}
 	return true;
+}
+
+int scano(char mode, char * buf)
+{
+	// Replace first non numeric character with NULL byte
+	for (size_t i = 0; i < sizeof(buf); i++) {
+		if (!((('0' <= buf[i]) && (buf[i] <= '9')) || (buf[i] != '.') || (buf[i] == '-'))) {
+			buf[i] = '\0';
+			break;
+		}
+	}
+
+	switch (mode) {
+	case 'd':
+		return 0;
+
+	default:
+		return(-1);
+	}
+}
+
+float get_pfb(char * buf)
+{
+	uint32_t pfb, fangleH, fangleF;
+	//sscanf(buf, "%ld %ld.%ld", &pfb, &fangleH, &fangleF);
+	return(float) fangleH;
 }
