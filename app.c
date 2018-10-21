@@ -123,6 +123,7 @@ void APP_Tasks(void)
 	static char mc_response[BT_RX_PKT_SZ + 2];
 	static uint16_t mphase;
 	uint8_t c_down;
+	char *m_start;
 
 	if (TimerDone(TMR_LEDS)) {
 		SLED ^= 1;
@@ -260,19 +261,19 @@ void APP_Tasks(void)
 					clear_MC_port();
 					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
 					display_ea_line(mc_response);
-					WaitMs(2000);
+					WaitMs(4000);
 
 					/* find and compute resolver data */
-					if (strstr(appData.receive_packet, cr_text->angle)) { // resolver angle data
-						mphase = 123;
-						get_pfb(appData.receive_packet);
+					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
+						mphase = get_pfb(appData.receive_packet);
 					} else {
 						mphase = 321;
 						//RESET();
 					}
 
-					//					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
-					//					display_ea_line(mc_response);
+					sprintf(mc_response, "\eO\x01\x01float %f ", mphase);
+					display_ea_line(mc_response);
+					WaitMs(4000);
 
 					MC_SendCommand(cr_text->dis, true);
 
@@ -426,7 +427,13 @@ int scano(char mode, char * buf)
 
 float get_pfb(char * buf)
 {
-	uint32_t pfb, fangleH = 123, fangleF = 123;
-	//sscanf(buf, "%ld %ld.%ld", &pfb, &fangleH, &fangleF);
-	return(float) fangleH;
+	float pfb;
+	char *token;
+
+	token = strtok(buf, " ");
+	if (token) {
+		pfb = atof(token);
+		return(float) pfb;
+	} else
+		return(666.66);
 }
