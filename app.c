@@ -245,18 +245,24 @@ void APP_Tasks(void)
 					MC_SendCommand(cr_text->pfb, true);
 					WaitMs(100);
 
+					/* find PFB command echo from controller */
+					while (!MC_ReceivePacket(appData.receive_packet)) {
+					}
+
+					/* find PFB resolver data from controller */
 					while (!MC_ReceivePacket(appData.receive_packet)) {
 						sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
 						display_ea_line(mc_response);
 					}
-
 					clear_MC_port();
+					WaitMs(2000);
+
+					/* find and compute resolver data */
 					if (strstr(appData.receive_packet, cr_text->angle)) { // resolver angle data
 						mphase = 123;
 						get_pfb(appData.receive_packet);
 					} else {
 						mphase = 321;
-						MC_SendCommand(cr_text->dis, true);
 						//RESET();
 					}
 
@@ -415,7 +421,7 @@ int scano(char mode, char * buf)
 
 float get_pfb(char * buf)
 {
-	uint32_t pfb, fangleH, fangleF;
+	uint32_t pfb, fangleH = 123, fangleF = 123;
 	//sscanf(buf, "%ld %ld.%ld", &pfb, &fangleH, &fangleF);
 	return(float) fangleH;
 }
