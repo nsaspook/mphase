@@ -243,7 +243,7 @@ void APP_Tasks(void)
 					WaitMs(15000); // wait while spin disk moves to position
 					clear_MC_port();
 					MC_SendCommand(cr_text->pfb, true);
-					WaitMs(100);
+					WaitMs(300);
 
 					/* find PFB command echo from controller */
 					while (!MC_ReceivePacket(appData.receive_packet)) {
@@ -251,10 +251,11 @@ void APP_Tasks(void)
 
 					/* find PFB resolver data from controller */
 					while (!MC_ReceivePacket(appData.receive_packet)) {
-						sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
-						display_ea_line(mc_response);
 					}
+					
 					clear_MC_port();
+					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
+					display_ea_line(mc_response);
 					WaitMs(2000);
 
 					/* find and compute resolver data */
@@ -266,8 +267,8 @@ void APP_Tasks(void)
 						//RESET();
 					}
 
-					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
-					display_ea_line(mc_response);
+//					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
+//					display_ea_line(mc_response);
 
 					MC_SendCommand(cr_text->dis, true);
 
