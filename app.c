@@ -122,6 +122,7 @@ void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
 	static uint16_t mphase;
+	uint8_t c_down;
 
 	if (TimerDone(TMR_LEDS)) {
 		SLED ^= 1;
@@ -238,9 +239,12 @@ void APP_Tasks(void)
 					clear_MC_port();
 					MC_SendCommand(cr_text->en, true);
 					MC_SendCommand(cr_text->t35, true);
-					sprintf(mc_response, "\eO\x01\x01%s", cr_text->diskmove);
-					display_ea_line(mc_response);
-					WaitMs(15000); // wait while spin disk moves to position
+					c_down = 15;
+					while (c_down--) {
+						sprintf(mc_response, "\eO\x01\x01%s %d ", cr_text->diskmove, c_down);
+						display_ea_line(mc_response);
+						WaitMs(1000); // wait while spin disk moves to motor locked position
+					}
 					clear_MC_port();
 					MC_SendCommand(cr_text->pfb, true);
 					WaitMs(300);
@@ -252,7 +256,7 @@ void APP_Tasks(void)
 					/* find PFB resolver data from controller */
 					while (!MC_ReceivePacket(appData.receive_packet)) {
 					}
-					
+
 					clear_MC_port();
 					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
 					display_ea_line(mc_response);
@@ -267,8 +271,8 @@ void APP_Tasks(void)
 						//RESET();
 					}
 
-//					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
-//					display_ea_line(mc_response);
+					//					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
+					//					display_ea_line(mc_response);
 
 					MC_SendCommand(cr_text->dis, true);
 
