@@ -321,6 +321,7 @@ void APP_Tasks(void)
 					WaitMs(100);
 				}
 				sprintf(mc_response, "\eO\x01\x04%s", cr_text->headder);
+//				sprintf(mc_response, "\eO\x01\x04 %f", get_pfb("54321 123.456"));
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
@@ -409,34 +410,18 @@ bool MC_SendCommand(const char *data, bool wait)
 	return true;
 }
 
-int scano(char mode, char * buf)
-{
-	// Replace first non numeric character with NULL byte
-	for (size_t i = 0; i < sizeof(buf); i++) {
-		if (!((('0' <= buf[i]) && (buf[i] <= '9')) || (buf[i] != '.') || (buf[i] == '-'))) {
-			buf[i] = '\0';
-			break;
-		}
-	}
-
-	switch (mode) {
-	case 'd':
-		return 0;
-
-	default:
-		return(-1);
-	}
-}
-
 float get_pfb(char * buf)
 {
 	float pfb;
-	char *token, **temp;
+	char *token, pfb_ascii[BT_RX_PKT_SZ + 2], s[2] = " ";
 
-	token = strtok(buf, " ");
-	if (token) {
-		pfb = strtod("123.321",temp);
+	token = strtok(buf, s); // init number search
+	token = strtok(NULL,s); // look for the second number
+
+	if (token != NULL) {
+		strcpy(pfb_ascii, token);
+		pfb = atof(pfb_ascii);
 		return pfb;
 	} else
-		return(666.66);
+		return(666.66); 
 }
