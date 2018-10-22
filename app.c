@@ -267,7 +267,8 @@ void APP_Tasks(void)
 
 					/* find and compute resolver data */
 					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
-						m_start[4] = '\000'; // short terminate
+						m_start[4] = ' '; // short terminate
+						m_start[5] = '\000'; // short terminate
 						sprintf(mc_response, "\eO\x01\x03%s", &m_start[-8]);
 						display_ea_line(mc_response);
 						mphase = get_pfb(&m_start[-8]); // pass a few of the first digits
@@ -324,7 +325,7 @@ void APP_Tasks(void)
 					WaitMs(100);
 				}
 				sprintf(mc_response, "\eO\x01\x04%s", cr_text->headder);
-				//				sprintf(mc_response, "\eO\x01\x04 %f", get_pfb("54321 123.456"));
+				//sprintf(mc_response, "\eO\x01\x04 %f", get_pfb("54321 123.456"));
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
@@ -418,12 +419,12 @@ float get_pfb(char * buf)
 	float pfb;
 	char *token, pfb_ascii[BT_RX_PKT_SZ + 2], s[2] = " ";
 
-	token = strtok(buf, s); // init number search
+	strcpy(pfb_ascii,buf);
+	token = strtok(pfb_ascii, s); // init number search
 	token = strtok(NULL, s); // look for the second number
 
 	if (token != NULL) {
-		strcpy(pfb_ascii, token);
-		pfb = atof(pfb_ascii);
+		pfb = atof(token);
 		return pfb;
 	} else
 		return(666.66);
