@@ -263,24 +263,23 @@ void APP_Tasks(void)
 					}
 
 					clear_MC_port();
+					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
+					display_ea_line(mc_response);
 
 					/* find and compute resolver data */
 					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
 						m_start[4] = ' '; // add another space for parser
 						m_start[5] = '\000'; // short terminate string
-						sprintf(mc_response, "\eO\x01\x01%s", &m_start[-8]);
-						display_ea_line(mc_response);
 						mphase = get_pfb(&m_start[-8]); // pass a few of the first digits
-						offset = ((24.0 / 2.0) * mphase) / 360.0;
+						offset = ((MOTOR_POLES / MOTOR_PAIRS) * mphase) / 360.0;
 						offset_whole = (int16_t) offset; // get the whole part
 						offset = (offset - (float) offset_whole)*360.0; // extract fractional part for angle offset
-						WaitMs(3000);
 					} else {
-						mphase = 321;
+						mphase = 321.123;
 						//RESET();
 					}
 
-					sprintf(mc_response, "\eO\x01\x02 pfb %f offset %f ", mphase, offset);
+					sprintf(mc_response, "\eO\x01\x02pfb %4.2f off %4.2f", mphase, offset);
 					display_ea_line(mc_response);
 					WaitMs(6000);
 
