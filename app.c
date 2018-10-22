@@ -267,7 +267,7 @@ void APP_Tasks(void)
 
 					/* find and compute resolver data */
 					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
-						m_start[4] = ' '; // short terminate
+						m_start[4] = ' '; // short terminate space
 						m_start[5] = '\000'; // short terminate
 						sprintf(mc_response, "\eO\x01\x03%s", &m_start[-8]);
 						display_ea_line(mc_response);
