@@ -31,7 +31,7 @@ APP_DATA appData = {
 };
 
 struct CR_DATA {
-	const char *headder, *bootb, *cmd, *buttonp,
+	const char *headder, *bootb, *cmd, *buttonp, *blank,
 	*c1, *r1,
 	*c2, *r2,
 	*c3, *r3,
@@ -52,6 +52,7 @@ static const struct CR_DATA CrData[] = {
 		.cmd = "-->",
 		.buttonp = "When done press OK  ",
 		.done = "Resolver value SET  ",
+		.blank = "                    ",
 		.c1 = "booting...",
 		.r1 = "booting...",
 		.c2 = "HVER\r\n",
@@ -59,7 +60,7 @@ static const struct CR_DATA CrData[] = {
 		.c3 = "MPOLES\r\n",
 		.r3 = "24",
 		.angle = ".",
-		.diskmove = "Wait, disk moving   ",
+		.diskmove = "Wait, moving",
 		.error = "Reboot SPIN AMP\r\n",
 		.s1 = "Press Clear Error on",
 		.w1 = "Spin Motor SCREEN   ",
@@ -240,6 +241,8 @@ void APP_Tasks(void)
 					clear_MC_port();
 					MC_SendCommand(cr_text->en, true);
 					MC_SendCommand(cr_text->t35, true);
+					sprintf(mc_response, "\eO\x01\x01%s", cr_text->blank);
+					display_ea_line(mc_response);
 					c_down = 15;
 					while (c_down--) {
 						sprintf(mc_response, "\eO\x01\x01%s %d ", cr_text->diskmove, c_down);
@@ -271,7 +274,7 @@ void APP_Tasks(void)
 						//RESET();
 					}
 
-					sprintf(mc_response, "\eO\x01\x01float %f ", mphase);
+					sprintf(mc_response, "\eO\x01\x02 float %f ", mphase);
 					display_ea_line(mc_response);
 					WaitMs(4000);
 
@@ -432,8 +435,8 @@ float get_pfb(char * buf)
 
 	token = strtok(buf, " ");
 	if (token) {
-		pfb = atof(token);
-		return(float) pfb;
+		pfb = atof("123.321");
+		return pfb;
 	} else
 		return(666.66);
 }
