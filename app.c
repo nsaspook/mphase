@@ -122,7 +122,8 @@ void clear_MC_port(void)
 void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
-	static uint16_t mphase;
+	static float mphase, offset;
+	int16_t offset_whole;
 	uint8_t c_down;
 	static char *m_start;
 
@@ -262,25 +263,26 @@ void APP_Tasks(void)
 					}
 
 					clear_MC_port();
-					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
-					display_ea_line(mc_response);
 
 					/* find and compute resolver data */
 					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
-						m_start[4] = ' '; // short terminate space
-						m_start[5] = '\000'; // short terminate
-						sprintf(mc_response, "\eO\x01\x03%s", &m_start[-8]);
+						m_start[4] = ' '; // add another space for parser
+						m_start[5] = '\000'; // short terminate string
+						sprintf(mc_response, "\eO\x01\x01%s", &m_start[-8]);
 						display_ea_line(mc_response);
 						mphase = get_pfb(&m_start[-8]); // pass a few of the first digits
-						WaitMs(6000);
+						offset = ((24.0 / 2.0) * mphase) / 360.0;
+						offset_whole = (int16_t) offset; // get the whole part
+						offset = (offset - (float) offset_whole)*360.0; // extract fractional part for angle offset
+						WaitMs(3000);
 					} else {
 						mphase = 321;
 						//RESET();
 					}
 
-					sprintf(mc_response, "\eO\x01\x02 float %f ", mphase);
+					sprintf(mc_response, "\eO\x01\x02 pfb %f offset %f ", mphase, offset);
 					display_ea_line(mc_response);
-					WaitMs(4000);
+					WaitMs(6000);
 
 					MC_SendCommand(cr_text->dis, true);
 
@@ -325,7 +327,6 @@ void APP_Tasks(void)
 					WaitMs(100);
 				}
 				sprintf(mc_response, "\eO\x01\x04%s", cr_text->headder);
-				//sprintf(mc_response, "\eO\x01\x04 %f", get_pfb("54321 123.456"));
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
@@ -419,7 +420,7 @@ float get_pfb(char * buf)
 	float pfb;
 	char *token, pfb_ascii[BT_RX_PKT_SZ + 2], s[2] = " ";
 
-	strcpy(pfb_ascii,buf);
+	strcpy(pfb_ascii, buf);
 	token = strtok(pfb_ascii, s); // init number search
 	token = strtok(NULL, s); // look for the second number
 
