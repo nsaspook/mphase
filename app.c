@@ -264,12 +264,14 @@ void APP_Tasks(void)
 					clear_MC_port();
 					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
 					display_ea_line(mc_response);
-					WaitMs(4000);
 
 					/* find and compute resolver data */
 					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
-						m_start[4]='\000'; // short terminate
+						m_start[4] = '\000'; // short terminate
+						sprintf(mc_response, "\eO\x01\x03%s", &m_start[-8]);
+						display_ea_line(mc_response);
 						mphase = get_pfb(&m_start[-8]); // pass a few of the first digits
+						WaitMs(6000);
 					} else {
 						mphase = 321;
 						//RESET();
