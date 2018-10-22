@@ -431,11 +431,11 @@ int scano(char mode, char * buf)
 float get_pfb(char * buf)
 {
 	float pfb;
-	char *token;
+	char *token, **temp;
 
 	token = strtok(buf, " ");
 	if (token) {
-		pfb = atof("123.321");
+		pfb = strtod("123.321",temp);
 		return pfb;
 	} else
 		return(666.66);
