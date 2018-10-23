@@ -4,6 +4,8 @@
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/tmr3.h"
 
+#define APP_VERSION_STR "0.5"       //This firmware version
+
 //Buffer sizes
 #define SIZE_RxBuffer   64               //UART RX software buffer size in bytes
 #define SIZE_TxBuffer   64               //UART TX software buffer size in bytes

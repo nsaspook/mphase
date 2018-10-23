@@ -47,7 +47,7 @@ struct CR_DATA {
 
 static const struct CR_DATA CrData[] = {
 	{
-		.headder = "Microchip Tech MCHP ",
+		.headder = "MCHP Tech MP V",
 		.bootb = "Boot Button Pressed ",
 		.cmd = "-->",
 		.buttonp = "When done press OK  ",
@@ -78,13 +78,16 @@ static const struct CR_DATA CrData[] = {
 		.pfb = "PFB\r\n",
 		.msg0 = "MSG 0\r\n",
 		.mnumber0 = "MNUMBER 0\r\n",
+		/* CHANGE THIS TO THE REAL 'SAVE' COMMAND 
+		 * in the production version.
+		 */
 		.save_parm = "XXXXX\r\n",
 	},
 	{
-		.headder = "Microchip Tech MCHP ",
+		.headder = "MCHP Tech XXX ",
 		.bootb = "Boot Button Pressed ",
 		.c1 = "booting",
-		.error = "Reboot SPIN AMP\r\n",
+		.error = "Reboot XXX AMP\r\n",
 	}
 };
 
@@ -325,7 +328,7 @@ void APP_Tasks(void)
 					appData.sw1 = false;
 					WaitMs(100);
 				}
-				sprintf(mc_response, "\eO\x01\x04%s", cr_text->headder);
+				sprintf(mc_response, "\eO\x01\x04%s%s", cr_text->headder, APP_VERSION_STR);
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
