@@ -14,6 +14,9 @@
 
 float get_pfb(char *);
 
+/*
+ * application data structures, state machine variables
+ */
 APP_DATA appData = {
 	.error_code = ERROR_NONE,
 	.got_packet = false,
@@ -45,6 +48,7 @@ struct CR_DATA {
 	*done;
 };
 
+// Display, command/response strings
 static const struct CR_DATA CrData[] = {
 	{
 		.headder = "MCHP Tech MP V",
@@ -91,6 +95,7 @@ static const struct CR_DATA CrData[] = {
 	}
 };
 
+// set strings to the proper controller
 static const struct CR_DATA *cr_text = &CrData[MC_SS600];
 
 static bool APP_Initialize(void)
@@ -363,7 +368,7 @@ void APP_Tasks(void)
 
 bool MC_ReceivePacket(char * Message)
 {
-	static enum BluetoothDecodeState btDecodeState = WaitForCR; //Static so maintains state on reentry   //Byte read from the UART buffer
+	static enum BluetoothDecodeState btDecodeState = WaitForCR; //Static so maintains state on reentry, Byte read(s) from the UART buffer
 	static uint16_t i = 0;
 
 	if (EUSART1_is_rx_ready()) //Check if new data byte 
@@ -416,6 +421,8 @@ bool MC_SendCommand(const char *data, bool wait)
 	}
 	return true;
 }
+
+// resolver angle data from controller parser
 
 float get_pfb(char * buf)
 {

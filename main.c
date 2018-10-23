@@ -77,9 +77,8 @@ void main(void)
 	//INTERRUPT_PeripheralInterruptDisable();
 
 
-	while (1) {
+	while (true) {
 		APP_Tasks();
-		// Add your application code
 	}
 }
 /**

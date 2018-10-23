@@ -33,35 +33,17 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
-// TODO Insert appropriate #include <>
-
-// TODO Insert C++ class definitions if appropriate
-
-// TODO Insert declarations
-
-// Comment a function and leverage automatic documentation with slash star star
-/**
-    <p><b>Function prototype:</b></p>
-  
-    <p><b>Summary:</b></p>
-
-    <p><b>Description:</b></p>
-
-    <p><b>Precondition:</b></p>
-
-    <p><b>Parameters:</b></p>
-
-    <p><b>Returns:</b></p>
-
-    <p><b>Example:</b></p>
-    <code>
- 
-    </code>
-
-    <p><b>Remarks:</b></p>
+/*
+ * timer 0: key bounce and delays
+ * timer 1: software timers
+ * timer 3: speaker sound generation
+ * usrt 1: motor controller comms
+ * uart 2: LCD comms
+ * EXT INT 0: SW 1 push detect
+ * EXT INT 1: SW 2 push detect
+ * EXT INT 2: SW 3 push detect
+ * EXT INT 3: SW 4 push detect
  */
-// TODO Insert declarations or function prototypes (right here) to leverage 
-// live documentation
 
 #ifdef	__cplusplus
 extern "C" {
