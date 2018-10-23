@@ -316,8 +316,29 @@ void APP_Tasks(void)
 						m_start[4] = ' '; // add another space for parser
 						m_start[5] = '\000'; // short terminate string
 						offset = get_pfb(&m_start[-8]); // pass a few of the first unused number digits
+						if (offset == 666) {
+							sprintf(mc_response, cr_text->line2, cr_text->error);
+							display_ea_line(mc_response);
+							c_down = 15;
+							while (c_down--) {
+								sprintf(mc_response, cr_text->line_d, cr_text->c1, c_down);
+								display_ea_line(mc_response);
+								WaitMs(333);
+							}
+#ifdef	PRODUCTION
+							RESET();
+#endif
+						}
 					} else {
 						offset = 999;
+						sprintf(mc_response, cr_text->line2, cr_text->error);
+						display_ea_line(mc_response);
+						c_down = 15;
+						while (c_down--) {
+							sprintf(mc_response, cr_text->line_d, cr_text->c1, c_down);
+							display_ea_line(mc_response);
+							WaitMs(333);
+						}
 #ifdef	PRODUCTION
 						RESET(); // something is wrong so restart mcu
 #endif
