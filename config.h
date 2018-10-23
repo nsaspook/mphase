@@ -4,7 +4,7 @@
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/tmr3.h"
 
-#define APP_VERSION_STR "0.5"       //This firmware version
+#define APP_VERSION_STR "0.6"       //This firmware version
 
 //#define PRODUCTION
 

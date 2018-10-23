@@ -114,7 +114,7 @@ static const struct CR_DATA CrData[] = {
 
 static const struct RS_DATA RsData[] = {
 	{
-		.line_m = " MPHASE %d\r\n",
+		.line_m = " MPHASE %d            \r\n",
 		.line_o = "\eO\x01\x02 offset %d",
 		.line_s = "%s",
 	},
@@ -126,6 +126,7 @@ static const struct RS_DATA RsData[] = {
 // set strings to the proper controller
 static const struct CR_DATA *cr_text = &CrData[MC_SS600];
 static const struct RS_DATA *rs_text = &RsData[MC_SS600];
+const char build_date[] = __DATE__, build_time[] = __TIME__;
 
 static bool APP_Initialize(void)
 {
@@ -173,9 +174,10 @@ void APP_Tasks(void)
 	case APP_INITIALIZE:
 		if (APP_Initialize()) {
 			appData.state = APP_CONNECT;
-			display_ea_init(500);
+			display_ea_init(700);
 			BUZZER_OFF;
 			display_ea_ff(1);
+			display_ea_cursor_off(1);
 			display_ea_version(1000);
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
 		} else {
@@ -395,6 +397,10 @@ void APP_Tasks(void)
 					WaitMs(100);
 				}
 				sprintf(mc_response, cr_text->line_h, cr_text->headder, APP_VERSION_STR);
+				display_ea_line(mc_response);
+				sprintf(mc_response, cr_text->line2, __DATE__);
+				display_ea_line(mc_response);
+				sprintf(mc_response, cr_text->line3, __TIME__);
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);

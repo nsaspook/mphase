@@ -18,6 +18,7 @@ extern "C" {
 	void display_ea_init(uint16_t);
 	void display_ea_version(uint16_t);
 	void display_ea_ff(uint16_t);
+	void display_ea_cursor_off(uint16_t);
 	void display_ea_line(char *);
 
 #ifdef	__cplusplus
