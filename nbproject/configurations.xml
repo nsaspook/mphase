@@ -160,10 +160,10 @@
         <property key="data-model-size-of-double-gcc" value="no-short-double"/>
         <property key="data-model-size-of-float" value="32"/>
         <property key="data-model-size-of-float-gcc" value="no-short-float"/>
-        <property key="display-class-usage" value="false"/>
-        <property key="display-hex-usage" value="false"/>
-        <property key="display-overall-usage" value="false"/>
-        <property key="display-psect-usage" value="false"/>
+        <property key="display-class-usage" value="true"/>
+        <property key="display-hex-usage" value="true"/>
+        <property key="display-overall-usage" value="true"/>
+        <property key="display-psect-usage" value="true"/>
         <property key="extra-lib-directories" value=""/>
         <property key="fill-flash-options-addr" value=""/>
         <property key="fill-flash-options-const" value=""/>

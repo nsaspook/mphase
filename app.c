@@ -49,7 +49,14 @@ struct CR_DATA {
 	*line1,
 	*line2,
 	*line3,
-	*line4;
+	*line4,
+	*line_d,
+	*line_h;
+};
+
+struct RS_DATA {
+	const char *line_m,
+	*line_o;
 };
 
 // Display, command/response strings
@@ -93,21 +100,32 @@ static const struct CR_DATA CrData[] = {
 #else
 		.save_parm = "XXXXX\r\n",
 #endif
-		.line1 = "\eO\x01\x01%s\r\n",
-		.line2 = "\eO\x01\x02%s\r\n",
-		.line3 = "\eO\x01\x03%s\r\n",
-		.line4 = "\eO\x01\x04%s\r\n",
+		.line1 = "\eO\x01\x01%s",
+		.line2 = "\eO\x01\x02%s",
+		.line3 = "\eO\x01\x03%s",
+		.line4 = "\eO\x01\x04%s",
+		.line_d = "\eO\x01\x01%s %d ",
+		.line_h = "\eO\x01\x04%s%s",
 	},
 	{
-		.headder = "MCHP Tech XXX ",
-		.bootb = "Boot Button Pressed ",
-		.c1 = "booting",
-		.error = "Reboot XXX AMP\r\n",
+		.headder = " ",
+	}
+};
+
+static const struct RS_DATA RsData[] = {
+	{
+		.line_m = " MPHASE %4.2f \r\n",
+		.line_o = "\eO\x01\x02pfb %4.2f off %4.2f",
+	},
+	{
+		.line_m = " MPHASE %4.2f \r\n",
+		.line_o = "\eO\x01\x02pfb %4.2f off %4.2f",
 	}
 };
 
 // set strings to the proper controller
 static const struct CR_DATA *cr_text = &CrData[MC_SS600];
+static const struct RS_DATA *rs_text = &RsData[MC_SS600];
 
 static bool APP_Initialize(void)
 {
@@ -230,6 +248,9 @@ void APP_Tasks(void)
 						sprintf(mc_response, cr_text->line4, cr_text->buttonp);
 						display_ea_line(mc_response);
 					}
+					sprintf(mc_response, cr_text->line1, cr_text->blank);
+					display_ea_line(mc_response);
+
 					BUZZER_ON;
 					appData.sw1 = false;
 					WaitMs(100);
@@ -250,6 +271,8 @@ void APP_Tasks(void)
 						sprintf(mc_response, cr_text->line4, cr_text->buttonp);
 						display_ea_line(mc_response);
 					}
+					sprintf(mc_response, cr_text->line4, cr_text->blank);
+					display_ea_line(mc_response);
 					BUZZER_ON;
 					appData.sw1 = false;
 					WaitMs(100);
@@ -260,9 +283,14 @@ void APP_Tasks(void)
 					MC_SendCommand(cr_text->t35, true);
 					sprintf(mc_response, cr_text->line1, cr_text->blank);
 					display_ea_line(mc_response);
+					sprintf(mc_response, cr_text->line2, cr_text->blank);
+					display_ea_line(mc_response);
+					sprintf(mc_response, cr_text->line3, cr_text->blank);
+					display_ea_line(mc_response);
+
 					c_down = 15;
 					while (c_down--) {
-						sprintf(mc_response, "\eO\x01\x01%s %d ", cr_text->diskmove, c_down);
+						sprintf(mc_response, cr_text->line_d, cr_text->diskmove, c_down);
 						display_ea_line(mc_response);
 						WaitMs(1000); // wait while spin disk moves to motor locked position
 					}
@@ -279,6 +307,8 @@ void APP_Tasks(void)
 					}
 
 					clear_MC_port();
+					sprintf(mc_response, cr_text->line1, cr_text->blank);
+					display_ea_line(mc_response);
 					sprintf(mc_response, cr_text->line1, appData.receive_packet);
 					display_ea_line(mc_response);
 
@@ -286,16 +316,20 @@ void APP_Tasks(void)
 					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
 						m_start[4] = ' '; // add another space for parser
 						m_start[5] = '\000'; // short terminate string
-						mphase = get_pfb(&m_start[-8]); // pass a few of the first digits
+						mphase = get_pfb(&m_start[-8]); // pass a few of the first unused number digits
 						offset = ((MOTOR_POLES / MOTOR_PAIRS) * mphase) / 360.0;
 						offset_whole = (int16_t) offset; // get the whole part
 						offset = (offset - (float) offset_whole)*360.0; // extract fractional part for angle offset
 					} else {
 						mphase = 321.123;
-						//RESET();
+#ifdef	PRODUCTION
+						RESET(); // something is wrong so restart mcu
+#endif
 					}
 
-					sprintf(mc_response, "\eO\x01\x02pfb %4.2f off %4.2f", mphase, offset);
+					sprintf(mc_response, cr_text->line2, cr_text->blank);
+					display_ea_line(mc_response);
+					sprintf(mc_response, rs_text->line_o, mphase, offset);
 					display_ea_line(mc_response);
 					WaitMs(6000);
 
@@ -309,17 +343,20 @@ void APP_Tasks(void)
 						sprintf(mc_response, cr_text->line4, cr_text->buttonp);
 						display_ea_line(mc_response);
 					}
+					sprintf(mc_response, cr_text->line1, cr_text->blank);
+					display_ea_line(mc_response);
 					BUZZER_ON;
 					appData.sw1 = false;
 					WaitMs(100);
 					BUZZER_OFF;
 
 					clear_MC_port();
-					sprintf(mc_response, "MPHASE %d\r\n", mphase);
+					/* need to round and convert data to integer */
+					sprintf(mc_response, "MPHASE %d\r\n", (uint16_t) mphase); // send data to controller
 					MC_SendCommand(mc_response, true);
 					MC_SendCommand(cr_text->msg0, true);
 					MC_SendCommand(cr_text->mnumber0, true);
-					MC_SendCommand(cr_text->save_parm, true);
+					MC_SendCommand(cr_text->save_parm, true); // save updated offset angle to controller
 					BUZZER_ON;
 					WaitMs(100);
 					BUZZER_OFF;
@@ -341,7 +378,7 @@ void APP_Tasks(void)
 					appData.sw1 = false;
 					WaitMs(100);
 				}
-				sprintf(mc_response, "\eO\x01\x04%s%s", cr_text->headder, APP_VERSION_STR);
+				sprintf(mc_response, cr_text->line_h, cr_text->headder, APP_VERSION_STR);
 				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
@@ -349,7 +386,7 @@ void APP_Tasks(void)
 		break;
 	case APP_DONE:
 		while (true) {
-			sprintf(mc_response, " MPHASE %4.2f \r\n", mphase);
+			sprintf(mc_response, rs_text->line_m, mphase);
 			display_ea_line(mc_response);
 			WaitMs(100);
 			BUZZER_OFF;
@@ -373,6 +410,8 @@ void APP_Tasks(void)
 	}
 	BUZZER_OFF;
 } //end APP_Tasks()
+
+// collect and buffer controller data
 
 bool MC_ReceivePacket(char * Message)
 {
@@ -438,7 +477,7 @@ float get_pfb(char * buf)
 	char *token, pfb_ascii[BT_RX_PKT_SZ + 2], s[2] = " ";
 
 	strcpy(pfb_ascii, buf);
-	token = strtok(pfb_ascii, s); // init number search
+	token = strtok(pfb_ascii, s); // start token search
 	token = strtok(NULL, s); // look for the second number
 
 	if (token != NULL) {
