@@ -6,6 +6,8 @@
 
 #define APP_VERSION_STR "0.5"       //This firmware version
 
+//#define PRODUCTION
+
 //Buffer sizes
 #define SIZE_RxBuffer   64               //UART RX software buffer size in bytes
 #define SIZE_TxBuffer   64               //UART TX software buffer size in bytes

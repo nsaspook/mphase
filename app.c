@@ -34,7 +34,7 @@ APP_DATA appData = {
 };
 
 struct CR_DATA {
-	const char *headder, *bootb, *cmd, *buttonp, *blank,
+	const char *headder, *bootb, *buttonp, *blank,
 	*c1, *r1,
 	*c2, *r2,
 	*c3, *r3,
@@ -45,7 +45,11 @@ struct CR_DATA {
 	*en, *t35, *pfb,
 	*msg0, *mnumber0, *save_parm,
 	*error,
-	*done;
+	*done,
+	*line1,
+	*line2,
+	*line3,
+	*line4;
 };
 
 // Display, command/response strings
@@ -53,7 +57,6 @@ static const struct CR_DATA CrData[] = {
 	{
 		.headder = "MCHP Tech MP V",
 		.bootb = "Boot Button Pressed ",
-		.cmd = "-->",
 		.buttonp = "When done press OK  ",
 		.done = "Resolver value SET  ",
 		.blank = "                    ",
@@ -85,7 +88,15 @@ static const struct CR_DATA CrData[] = {
 		/* CHANGE THIS TO THE REAL 'SAVE' COMMAND 
 		 * in the production version.
 		 */
+#ifdef	PRODUCTION
+		.save_parm = "SAVE\r\n",
+#else
 		.save_parm = "XXXXX\r\n",
+#endif
+		.line1 = "\eO\x01\x01%s\r\n",
+		.line2 = "\eO\x01\x02%s\r\n",
+		.line3 = "\eO\x01\x03%s\r\n",
+		.line4 = "\eO\x01\x04%s\r\n",
 	},
 	{
 		.headder = "MCHP Tech XXX ",
@@ -164,9 +175,6 @@ void APP_Tasks(void)
 			clear_MC_port();
 			BUZZER_ON;
 			appData.got_packet = false;
-			if (strstr(appData.receive_packet, cr_text->cmd)) { // command prompt
-				strcpy(appData.receive_packet, "");
-			}
 			if (strstr(appData.receive_packet, cr_text->r1)) { // power restart
 				appData.mc = MC_BOOT;
 				appData.got_packet = true;
@@ -194,14 +202,14 @@ void APP_Tasks(void)
 		if (TimerDone(TMR_DIS)) {
 			IO_RA2_Toggle();
 			if (appData.got_packet) {
-				sprintf(mc_response, "\eO\x01\x01%s\r\n", "                   ");
+				sprintf(mc_response, cr_text->line1, cr_text->blank);
 				display_ea_line(mc_response);
-				sprintf(mc_response, "\eO\x01\x01%s\r\n", appData.receive_packet);
+				sprintf(mc_response, cr_text->line1, appData.receive_packet);
 				display_ea_line(mc_response);
 				switch (appData.mc) {
 					//Initial state
 				case MC_INITIALIZE:
-					sprintf(mc_response, "\eO\x01\x02%s", cr_text->error);
+					sprintf(mc_response, cr_text->line2, cr_text->error);
 					display_ea_line(mc_response);
 					break;
 				case MC_BOOT:
@@ -214,12 +222,12 @@ void APP_Tasks(void)
 					break;
 				case MC_SETUP:
 					BUZZER_OFF;
-					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s2);
+					sprintf(mc_response, cr_text->line2, cr_text->s2);
 					display_ea_line(mc_response);
-					sprintf(mc_response, "\eO\x01\x03%s", cr_text->w2);
+					sprintf(mc_response, cr_text->line3, cr_text->w2);
 					display_ea_line(mc_response);
 					while (!appData.sw1) {
-						sprintf(mc_response, "\eO\x01\x04%s", cr_text->buttonp);
+						sprintf(mc_response, cr_text->line4, cr_text->buttonp);
 						display_ea_line(mc_response);
 					}
 					BUZZER_ON;
@@ -234,12 +242,12 @@ void APP_Tasks(void)
 					MC_SendCommand(cr_text->mphase90, true);
 					MC_SendCommand(cr_text->opmode2, true);
 
-					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s1);
+					sprintf(mc_response, cr_text->line2, cr_text->s1);
 					display_ea_line(mc_response);
-					sprintf(mc_response, "\eO\x01\x03%s", cr_text->w1);
+					sprintf(mc_response, cr_text->line3, cr_text->w1);
 					display_ea_line(mc_response);
 					while (!appData.sw1) {
-						sprintf(mc_response, "\eO\x01\x04%s", cr_text->buttonp);
+						sprintf(mc_response, cr_text->line4, cr_text->buttonp);
 						display_ea_line(mc_response);
 					}
 					BUZZER_ON;
@@ -250,7 +258,7 @@ void APP_Tasks(void)
 					clear_MC_port();
 					MC_SendCommand(cr_text->en, true);
 					MC_SendCommand(cr_text->t35, true);
-					sprintf(mc_response, "\eO\x01\x01%s", cr_text->blank);
+					sprintf(mc_response, cr_text->line1, cr_text->blank);
 					display_ea_line(mc_response);
 					c_down = 15;
 					while (c_down--) {
@@ -271,7 +279,7 @@ void APP_Tasks(void)
 					}
 
 					clear_MC_port();
-					sprintf(mc_response, "\eO\x01\x01%s", appData.receive_packet);
+					sprintf(mc_response, cr_text->line1, appData.receive_packet);
 					display_ea_line(mc_response);
 
 					/* find and compute resolver data */
@@ -293,12 +301,12 @@ void APP_Tasks(void)
 
 					MC_SendCommand(cr_text->dis, true);
 
-					sprintf(mc_response, "\eO\x01\x02%s", cr_text->s3);
+					sprintf(mc_response, cr_text->line2, cr_text->s3);
 					display_ea_line(mc_response);
-					sprintf(mc_response, "\eO\x01\x03%s", cr_text->w3);
+					sprintf(mc_response, cr_text->line3, cr_text->w3);
 					display_ea_line(mc_response);
 					while (!appData.sw1) {
-						sprintf(mc_response, "\eO\x01\x04%s", cr_text->buttonp);
+						sprintf(mc_response, cr_text->line4, cr_text->buttonp);
 						display_ea_line(mc_response);
 					}
 					BUZZER_ON;
