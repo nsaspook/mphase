@@ -7,12 +7,11 @@
 #include "app.h"
 #include "config.h"
 #include "timers.h"
+#include "pfb.h"
 #include "mcc_generated_files/tmr0.h"
 #include "mcc_generated_files/tmr1.h"
 #include "board/ea_display.h"
 #include "mcc_generated_files/eusart1.h"
-
-float get_pfb(char *);
 
 /*
  * application data structures, state machine variables
@@ -56,7 +55,8 @@ struct CR_DATA {
 
 struct RS_DATA {
 	const char *line_m,
-	*line_o;
+	*line_o,
+	*line_s;
 };
 
 // Display, command/response strings
@@ -114,12 +114,12 @@ static const struct CR_DATA CrData[] = {
 
 static const struct RS_DATA RsData[] = {
 	{
-		.line_m = " MPHASE %4.2f \r\n",
-		.line_o = "\eO\x01\x02pfb %4.2f off %4.2f",
+		.line_m = " MPHASE %d\r\n",
+		.line_o = "\eO\x01\x02 offset %d",
+		.line_s = "%s",
 	},
 	{
-		.line_m = " MPHASE %4.2f \r\n",
-		.line_o = "\eO\x01\x02pfb %4.2f off %4.2f",
+		.line_m = " ",
 	}
 };
 
@@ -159,8 +159,7 @@ void clear_MC_port(void)
 void APP_Tasks(void)
 {
 	static char mc_response[BT_RX_PKT_SZ + 2];
-	static float mphase, offset;
-	int16_t offset_whole;
+	int16_t offset;
 	uint8_t c_down;
 	static char *m_start;
 
@@ -316,12 +315,9 @@ void APP_Tasks(void)
 					if ((m_start = strstr(appData.receive_packet, cr_text->angle))) { // resolver angle data
 						m_start[4] = ' '; // add another space for parser
 						m_start[5] = '\000'; // short terminate string
-						mphase = get_pfb(&m_start[-8]); // pass a few of the first unused number digits
-						offset = ((MOTOR_POLES / MOTOR_PAIRS) * mphase) / 360.0;
-						offset_whole = (int16_t) offset; // get the whole part
-						offset = (offset - (float) offset_whole)*360.0; // extract fractional part for angle offset
+						offset = get_pfb(&m_start[-8]); // pass a few of the first unused number digits
 					} else {
-						mphase = 321.123;
+						offset = 999;
 #ifdef	PRODUCTION
 						RESET(); // something is wrong so restart mcu
 #endif
@@ -329,7 +325,7 @@ void APP_Tasks(void)
 
 					sprintf(mc_response, cr_text->line2, cr_text->blank);
 					display_ea_line(mc_response);
-					sprintf(mc_response, rs_text->line_o, mphase, offset);
+					sprintf(mc_response, rs_text->line_o, offset);
 					display_ea_line(mc_response);
 					WaitMs(6000);
 
@@ -351,8 +347,7 @@ void APP_Tasks(void)
 					BUZZER_OFF;
 
 					clear_MC_port();
-					/* need to round and convert data to integer */
-					sprintf(mc_response, "MPHASE %d\r\n", (uint16_t) mphase); // send data to controller
+					sprintf(mc_response, rs_text->line_m, offset); // send data to controller
 					MC_SendCommand(mc_response, true);
 					MC_SendCommand(cr_text->msg0, true);
 					MC_SendCommand(cr_text->mnumber0, true);
@@ -365,7 +360,7 @@ void APP_Tasks(void)
 					appData.mc = MC_DONE;
 					break;
 				case MC_DONE:
-					sprintf(mc_response, "%s", cr_text->done);
+					sprintf(mc_response, rs_text->line_s, cr_text->done);
 					display_ea_line(mc_response);
 					break;
 				default:
@@ -386,7 +381,7 @@ void APP_Tasks(void)
 		break;
 	case APP_DONE:
 		while (true) {
-			sprintf(mc_response, rs_text->line_m, mphase);
+			sprintf(mc_response, rs_text->line_m, offset);
 			display_ea_line(mc_response);
 			WaitMs(100);
 			BUZZER_OFF;
@@ -469,20 +464,3 @@ bool MC_SendCommand(const char *data, bool wait)
 	return true;
 }
 
-// resolver angle data from controller parser
-
-float get_pfb(char * buf)
-{
-	float pfb;
-	char *token, pfb_ascii[BT_RX_PKT_SZ + 2], s[2] = " ";
-
-	strcpy(pfb_ascii, buf);
-	token = strtok(pfb_ascii, s); // start token search
-	token = strtok(NULL, s); // look for the second number
-
-	if (token != NULL) {
-		pfb = atof(token);
-		return pfb;
-	} else
-		return(666.66);
-}
