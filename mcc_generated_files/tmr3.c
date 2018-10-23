@@ -154,10 +154,10 @@ uint8_t TMR3_CheckGateValueStatus(void)
 
 void TMR3_ISR(void)
 {
-
+	static uint8_t	chirp=0;
 	// Clear the TMR3 interrupt flag
 	PIR2bits.TMR3IF = 0;
-	TMR3_WriteTimer(timer3ReloadVal);
+	TMR3_WriteTimer(timer3ReloadVal+chirp++); // sweep the sound a bit
 
 	if (TMR3_InterruptHandler) {
 		TMR3_InterruptHandler();
@@ -173,7 +173,7 @@ void TMR3_DefaultInterruptHandler(void)
 {
 	// add your TMR3 interrupt custom code
 	// or set custom function using TMR3_SetInterruptHandler()
-	IO_RA5_Toggle();
+	IO_RA5_Toggle(); // speaker
 }
 
 /**
