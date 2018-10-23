@@ -25,6 +25,7 @@
 #define SW_D_L		6
 
 #define MC_SS600	0
+#define COOKED_MC
 #define MOTOR_POLES	24.0
 #define MOTOR_PAIRS	2.0
 

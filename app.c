@@ -333,11 +333,11 @@ void APP_Tasks(void)
 		break;
 	case APP_DONE:
 		while (true) {
-			sprintf(mc_response, " MPHASE %d \r\n", mphase);
+			sprintf(mc_response, " MPHASE %4.2f \r\n", mphase);
 			display_ea_line(mc_response);
 			WaitMs(100);
 			BUZZER_OFF;
-			WaitMs(50);
+			WaitMs(1333);
 			BUZZER_ON;
 		};
 		break;

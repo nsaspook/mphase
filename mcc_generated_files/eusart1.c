@@ -49,6 +49,7 @@
  */
 #include "eusart1.h"
 #include "pin_manager.h"
+#include "../config.h"
 
 /**
   Section: Macro Declarations
@@ -193,13 +194,17 @@ void EUSART1_Receive_ISR(void)
 	/*
 	 * ignore MC prompt chars
 	 */
+#ifdef	COOKED_MC
 	if ((treg != '-') && (treg != '>')) {
+#endif
 		eusart1RxBuffer[eusart1RxHead++] = treg;
 		if (sizeof(eusart1RxBuffer) <= eusart1RxHead) {
 			eusart1RxHead = 0;
 		}
 		eusart1RxCount++;
+#ifdef	COOKED_MC
 	}
+#endif
 }
 
 void EUSART1_SetTxInterruptHandler(void (* interruptHandler)(void))
