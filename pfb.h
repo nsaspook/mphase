@@ -20,7 +20,7 @@ extern "C" {
 #include <math.h>
 #include "config.h"
 
-	uint16_t get_pfb(char *);
+	uint16_t get_pfb(const char *);
 
 #ifdef	__cplusplus
 }
