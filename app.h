@@ -13,7 +13,7 @@
 
 #define ERROR_NONE              1
 #define ERROR_INITIALIZATION    -2
-#define ERROR_RN_FW             -3
+#define ERROR_FW             -3
 
 enum BluetoothDecodeState {
 	WaitForCR, WaitForLF
@@ -43,15 +43,39 @@ typedef enum {
 typedef struct {
 	APP_STATE_T state; //APP_Tasks state
 	MC_STATE_T mc; // servo controller state
-	char receive_packet[BT_RX_PKT_SZ]; //message buffers
-	char transmit_packet[BT_TX_PKT_SZ];
-	bool got_packet, //new packet flag
-	update_packet;
+	char receive_packet[MC_RX_PKT_SZ]; //message buffers
+	bool got_packet; //new packet flag
 	int8_t error_code;
 	volatile bool sw1, sw2, sw3, sw4; //switch states
 	uint8_t sw1Changed, sw2Changed, sw3Changed, sw4Changed; //switch state has changed
-	uint32_t version_code; // firmware version
 } APP_DATA;
+
+struct CR_DATA {
+	const char *headder, *bootb, *buttonp, *blank,
+	*c1, *r1,
+	*c2, *r2,
+	*c3, *r3,
+	*s1, *s2, *s3,
+	*w1, *w2, *w3,
+	*angle, *diskmove,
+	*dis, *msg2, *mpoles0, *mphase90, *opmode2,
+	*en, *t35, *pfb,
+	*msg0, *mnumber0, *save_parm,
+	*error,
+	*done,
+	*line1,
+	*line2,
+	*line3,
+	*line4,
+	*line_d,
+	*line_h;
+};
+
+struct RS_DATA {
+	const char *line_m,
+	*line_o,
+	*line_s;
+};
 
 void APP_Tasks(void);
 bool MC_ReceivePacket(char *message);

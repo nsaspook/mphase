@@ -5,7 +5,7 @@
 uint16_t get_pfb(const char * buf)
 {
 	float offset, mphase, offset_whole;
-	char *token, pfb_ascii[BT_RX_PKT_SZ + 2], s[2] = " ";
+	char *token, pfb_ascii[MC_RX_PKT_SZ + 2], s[2] = " ";
 
 	strcpy(pfb_ascii, buf); // make a local copy of the data
 	token = strtok(pfb_ascii, s); // start token search

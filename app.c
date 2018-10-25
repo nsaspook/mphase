@@ -21,7 +21,6 @@ APP_DATA appData = {
 	.got_packet = false,
 	.state = APP_INITIALIZE,
 	.mc = MC_INITIALIZE,
-	.update_packet = false,
 	.sw1 = false,
 	.sw2 = false,
 	.sw3 = false,
@@ -32,100 +31,8 @@ APP_DATA appData = {
 	.sw4Changed = 0,
 };
 
-struct CR_DATA {
-	const char *headder, *bootb, *buttonp, *blank,
-	*c1, *r1,
-	*c2, *r2,
-	*c3, *r3,
-	*s1, *s2, *s3,
-	*w1, *w2, *w3,
-	*angle, *diskmove,
-	*dis, *msg2, *mpoles0, *mphase90, *opmode2,
-	*en, *t35, *pfb,
-	*msg0, *mnumber0, *save_parm,
-	*error,
-	*done,
-	*line1,
-	*line2,
-	*line3,
-	*line4,
-	*line_d,
-	*line_h;
-};
-
-struct RS_DATA {
-	const char *line_m,
-	*line_o,
-	*line_s;
-};
-
-// Display, command/response strings
-static const struct CR_DATA CrData[] = {
-	{
-		.headder = "MCHP Tech MP V",
-		.bootb = "Boot Button Pressed ",
-		.buttonp = "When done press OK  ",
-		.done = "Resolver value SET  ",
-		.blank = "                    ",
-		.c1 = "booting...",
-		.r1 = "booting...",
-		.c2 = "HVER\r\n",
-		.r2 = "Drive 70",
-		.c3 = "MPOLES\r\n",
-		.r3 = "24",
-		.angle = ".",
-		.diskmove = "Wait, moving",
-		.error = "Reboot SPIN AMP\r\n",
-		.s1 = "Press Clear Error on",
-		.w1 = "Spin Motor SCREEN   ",
-		.s2 = "Press FLIP UP on    ",
-		.w2 = "MID LEVEL SCREEN    ",
-		.s3 = "Power Cycle Spin AMP",
-		.w3 = "with Scan Safety Key",
-		.dis = "DIS\r\n",
-		.msg2 = "MSG 2\r\n",
-		.mpoles0 = "MPOLES 0\r\n",
-		.mphase90 = "MPHASE 90\r\n",
-		.opmode2 = "OPMODE 2\r\n",
-		.en = "EN\r\n",
-		.t35 = "T 35\r\n",
-		.pfb = "PFB\r\n",
-		.msg0 = "MSG 0\r\n",
-		.mnumber0 = "MNUMBER 0\r\n",
-		/* CHANGE THIS TO THE REAL 'SAVE' COMMAND 
-		 * in the production version.
-		 */
-#ifdef	PRODUCTION
-		.save_parm = "SAVE\r\n",
-#else
-		.save_parm = "XXXXX\r\n",
-#endif
-		.line1 = "\eO\x01\x01%s",
-		.line2 = "\eO\x01\x02%s",
-		.line3 = "\eO\x01\x03%s",
-		.line4 = "\eO\x01\x04%s",
-		.line_d = "\eO\x01\x01%s %d ",
-		.line_h = "\eO\x01\x04%s%s",
-	},
-	{
-		.headder = " ",
-	}
-};
-
-static const struct RS_DATA RsData[] = {
-	{
-		.line_m = " MPHASE %d            \r\n",
-		.line_o = "\eO\x01\x02 offset %d",
-		.line_s = "%s",
-	},
-	{
-		.line_m = " ",
-	}
-};
-
-// set strings to the proper controller
-static const struct CR_DATA *cr_text = &CrData[MC_SS600];
-static const struct RS_DATA *rs_text = &RsData[MC_SS600];
+extern const struct CR_DATA *cr_text;
+extern const struct RS_DATA *rs_text;
 const char build_date[] = __DATE__, build_time[] = __TIME__;
 
 static bool APP_Initialize(void)
@@ -159,7 +66,7 @@ void clear_MC_port(void)
 
 void APP_Tasks(void)
 {
-	static char mc_response[BT_RX_PKT_SZ + 2];
+	static char mc_response[MC_RX_PKT_SZ + 2];
 	int16_t offset;
 	uint8_t c_down;
 	static char *m_start;
@@ -186,6 +93,7 @@ void APP_Tasks(void)
 		break;
 		//Initialization failed
 	case APP_INITIALIZATION_ERROR:
+		appData.error_code = ERROR_INITIALIZATION;
 		BUZZER_ON;
 		break;
 	case APP_CONNECT:
@@ -444,7 +352,7 @@ bool MC_ReceivePacket(char * Message)
 	{
 
 		Message[i++] = EUSART1_Read();
-		if (i == BT_RX_PKT_SZ) {
+		if (i == MC_RX_PKT_SZ) {
 			i = 0;
 		}
 

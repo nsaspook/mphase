@@ -61,6 +61,7 @@
       <itemPath>app.c</itemPath>
       <itemPath>board/ea_display.c</itemPath>
       <itemPath>pfb.c</itemPath>
+      <itemPath>board/lang.c</itemPath>
     </logicalFolder>
     <logicalFolder name="f2" displayName="wiring" projectFiles="true">
       <logicalFolder name="board" displayName="board" projectFiles="true">
