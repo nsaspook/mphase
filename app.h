@@ -13,7 +13,7 @@
 
 #define ERROR_NONE              1
 #define ERROR_INITIALIZATION    -2
-#define ERROR_FW             -3
+#define ERROR_FW		-3
 
 enum McDecodeState {
 	WaitForCR, WaitForLF

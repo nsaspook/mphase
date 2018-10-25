@@ -35,7 +35,7 @@
 
 /*
  * timer 0: key bounce and delays
- * timer 1: software timers
+ * timer 1: software timers on low interrupt vector
  * timer 3: speaker sound generation
  * RA5 speaker driver pin
  * RA0 LED driver pin
