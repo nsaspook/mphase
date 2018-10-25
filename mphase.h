@@ -37,6 +37,8 @@
  * timer 0: key bounce and delays
  * timer 1: software timers
  * timer 3: speaker sound generation
+ * RA5 speaker driver pin
+ * RA0 LED driver pin
  * usrt 1: motor controller comms
  * uart 2: LCD comms
  * EXT INT 0: SW 1 push detect

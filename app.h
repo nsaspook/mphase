@@ -15,7 +15,7 @@
 #define ERROR_INITIALIZATION    -2
 #define ERROR_FW             -3
 
-enum BluetoothDecodeState {
+enum McDecodeState {
 	WaitForCR, WaitForLF
 };
 

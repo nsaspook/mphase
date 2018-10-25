@@ -345,7 +345,7 @@ void APP_Tasks(void)
 
 bool MC_ReceivePacket(char * Message)
 {
-	static enum BluetoothDecodeState btDecodeState = WaitForCR; //Static so maintains state on reentry, Byte read(s) from the UART buffer
+	static enum McDecodeState btDecodeState = WaitForCR; //Static so maintains state on reentry, Byte read(s) from the UART buffer
 	static uint16_t i = 0;
 
 	if (EUSART1_is_rx_ready()) //Check if new data byte 

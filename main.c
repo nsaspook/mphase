@@ -46,7 +46,27 @@
 #include "config.h"
 
 /*
-			 Main application
+ *	Main application MPHASE
+ *	A simple command, response parser that generates the proper offset angle
+ *	to program a direct driver servo motor system with a resolver for the
+ *	drive angle feedback. Serial port 1 sends and receives data on the
+ *	servo control port. Serial port 2 updates a 4*20 LCD display.
+ *	Both serial ports are 9600 baud with no flow control.
+ * 
+ *	There are two control buttons for the operator interface LCD. The top button near the
+ *	display is the 'OK' that should be pressed after the required action on the
+ *	LCD display has been executed. The second smaller button near the bottom is
+ *	the 'BOOT' button that allows the operator to bypass the wait for the
+ *	servo controller auto boot sequence so the operator can program an already running
+ *	motor control system. The 'BOOT' button can also reboot the MHPASE box by quickly pressing 
+ *	the 'BOOT' button and then the 'OK' button in sequence.
+ * 
+ *	Normally the servo controller is powered off first for a resolver calibration.
+ *	The MPHASE box serial cable with DB9 connector is attached to the servo DB9 serial port,
+ *	power is supplied to the MPHASE box via the attached power brick and
+ *	then 'RUN' power is switched on to the servo controller and motor.
+ *	The MPHASE box display should display a series of prompts with audio beeps 
+ *	if the serial connection is correct and the servo responds in the expected manner.
  */
 void main(void)
 {
