@@ -48,8 +48,8 @@
 /*
  *	Main application MPHASE
  *	A simple command, response parser that generates the proper offset angle
- *	to program a direct driver servo motor system with a resolver for the
- *	drive angle feedback. Serial port 1 sends and receives data on the
+ *	to program a direct drive servo motor system with a resolver for the
+ *	drive angle rotation/speed feedback. Serial port 1 sends and receives data on the
  *	servo control port. Serial port 2 updates a 4*20 LCD display.
  *	Both serial ports are 9600 baud with no flow control.
  * 
