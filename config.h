@@ -12,6 +12,7 @@
 #define MC_RX_PKT_SZ    64		//Max receive packet length
 
 #define DIS_REFRESH_MS	70		//delay between display updates
+#define MC_COMMS_MS	1000		// timeout waiting for controller response
 #define LED_BLINK_MS	900		//LED blink rate
 #define SLED		IO_RA0_LAT
 #define BUZZER_OFF	TMR3_StopTimer()

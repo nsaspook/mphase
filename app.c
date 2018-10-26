@@ -208,12 +208,27 @@ void APP_Tasks(void)
 					WaitMs(300);
 
 					/* find PFB command echo from controller */
+					StartTimer(TMR_MC_COMMS, MC_COMMS_MS);
 					while (!MC_ReceivePacket(appData.receive_packet)) {
+						if (TimerDone(TMR_MC_COMMS)) {
+							appData.state = APP_INITIALIZATION_ERROR;
+							break;
+						}
 					}
 
 					/* find PFB resolver data from controller */
+					StartTimer(TMR_MC_COMMS, MC_COMMS_MS);
 					while (!MC_ReceivePacket(appData.receive_packet)) {
+						if (TimerDone(TMR_MC_COMMS)) {
+							appData.state = APP_INITIALIZATION_ERROR;
+							break;
+						}
 					}
+
+#ifdef	PRODUCTION
+					if (appData.state == APP_INITIALIZATION_ERROR)
+						break;
+#endif
 
 					clear_MC_port();
 					sprintf(mc_response, cr_text->line1, cr_text->blank);
@@ -238,6 +253,8 @@ void APP_Tasks(void)
 #ifdef	PRODUCTION
 							RESET();
 #endif
+							appData.state = APP_INITIALIZATION_ERROR;
+							break;
 						}
 					} else {
 						offset = 999;
@@ -252,6 +269,8 @@ void APP_Tasks(void)
 #ifdef	PRODUCTION
 						RESET(); // something is wrong so restart mcu
 #endif
+						appData.state = APP_INITIALIZATION_ERROR;
+						break;
 					}
 
 					sprintf(mc_response, cr_text->line2, cr_text->blank);
