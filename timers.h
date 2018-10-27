@@ -15,12 +15,7 @@ enum APP_TIMERS {
     TMR_MC_COMMS,
     TMR_DIS,
     TMR_BUZZ,
-    TMR_SW1_DEBOUNCE,
-    TMR_SW2_DEBOUNCE,
-    TMR_SW3_DEBOUNCE,
-    TMR_SW4_DEBOUNCE,
     TMR_MC_TX,
-    TMR_BAT_CHECK,
     TMR_SPI,
     //
     //(Add timers here as needed)

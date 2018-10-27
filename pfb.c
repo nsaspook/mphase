@@ -19,5 +19,5 @@ uint16_t get_pfb(const char * buf)
 		/* need to round and convert data to integer */
 		return(uint16_t) roundf(offset);
 	} else
-		return(666);
+		return(BADNUM);
 }

@@ -241,7 +241,7 @@ void APP_Tasks(void)
 						m_start[4] = ' '; // add another space for parser
 						m_start[5] = '\000'; // short terminate string
 						offset = get_pfb(&m_start[-8]); // pass a few of the first unused number digits
-						if (offset == 666) {
+						if (offset == BADNUM) {
 							sprintf(mc_response, cr_text->line2, cr_text->error);
 							display_ea_line(mc_response);
 							c_down = 15;
@@ -257,7 +257,7 @@ void APP_Tasks(void)
 							break;
 						}
 					} else {
-						offset = 999;
+						offset = BADNUM2;
 						sprintf(mc_response, cr_text->line2, cr_text->error);
 						display_ea_line(mc_response);
 						c_down = 15;

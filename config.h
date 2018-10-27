@@ -4,7 +4,7 @@
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/tmr3.h"
 
-#define APP_VERSION_STR "0.7"		//This firmware version
+#define APP_VERSION_STR "0.8"		//This firmware version
 
 //#define PRODUCTION
 
@@ -26,5 +26,8 @@
 #define COOKED_MC			// clean prompts from controller
 #define MOTOR_POLES	24.0		// motor params
 #define MOTOR_PAIRS	2.0
+
+#define	BADNUM		666
+#define	BADNUM2		999
 
 #endif //CONFIG_H

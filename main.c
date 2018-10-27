@@ -41,6 +41,10 @@
     SOFTWARE.
  */
 
+// XC8 bogus warnings from MCC code
+#pragma warning disable 520
+#pragma warning disable 1498 
+
 #include "mcc_generated_files/mcc.h"
 #include "app.h"
 #include "config.h"
@@ -68,6 +72,7 @@
  *	The MPHASE box display should display a series of prompts with audio beeps 
  *	if the serial connection is correct and the servo responds in the expected manner.
  */
+
 void main(void)
 {
 	// Initialize the device
