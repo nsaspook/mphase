@@ -54,7 +54,7 @@ static const struct CR_DATA CrData[] = {
 
 static const struct RS_DATA RsData[] = {
 	{
-		.line_m = " MPHASE %d            \r\n",
+		.line_m = " MPHASE SAVED %d     \r\n",
 		.line_o = "\eO\x01\x02 offset %d",
 		.line_s = "%s",
 	},
