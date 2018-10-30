@@ -7142,6 +7142,90 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="led">
+<description>&lt;b&gt;LEDs&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;&lt;br&gt;
+Extended by Federico Battaglin &lt;author&gt;&amp;lt;federico.rd@fdpinternational.com&amp;gt;&lt;/author&gt; with DUOLED</description>
+<packages>
+<package name="LED3MM">
+<description>&lt;B&gt;LED&lt;/B&gt;&lt;p&gt;
+3 mm, round</description>
+<wire x1="1.5748" y1="-1.27" x2="1.5748" y2="1.27" width="0.254" layer="51"/>
+<wire x1="-1.524" y1="0" x2="-1.1708" y2="0.9756" width="0.1524" layer="51" curve="-39.80361"/>
+<wire x1="-1.524" y1="0" x2="-1.1391" y2="-1.0125" width="0.1524" layer="51" curve="41.633208"/>
+<wire x1="1.1571" y1="0.9918" x2="1.524" y2="0" width="0.1524" layer="51" curve="-40.601165"/>
+<wire x1="1.1708" y1="-0.9756" x2="1.524" y2="0" width="0.1524" layer="51" curve="39.80361"/>
+<wire x1="0" y1="1.524" x2="1.2401" y2="0.8858" width="0.1524" layer="21" curve="-54.461337"/>
+<wire x1="-1.2192" y1="0.9144" x2="0" y2="1.524" width="0.1524" layer="21" curve="-53.130102"/>
+<wire x1="0" y1="-1.524" x2="1.203" y2="-0.9356" width="0.1524" layer="21" curve="52.126876"/>
+<wire x1="-1.203" y1="-0.9356" x2="0" y2="-1.524" width="0.1524" layer="21" curve="52.126876"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0.635" width="0.1524" layer="51" curve="-90"/>
+<wire x1="-1.016" y1="0" x2="0" y2="1.016" width="0.1524" layer="51" curve="-90"/>
+<wire x1="0" y1="-0.635" x2="0.635" y2="0" width="0.1524" layer="51" curve="90"/>
+<wire x1="0" y1="-1.016" x2="1.016" y2="0" width="0.1524" layer="51" curve="90"/>
+<wire x1="0" y1="2.032" x2="1.561" y2="1.3009" width="0.254" layer="21" curve="-50.193108"/>
+<wire x1="-1.7929" y1="0.9562" x2="0" y2="2.032" width="0.254" layer="21" curve="-61.926949"/>
+<wire x1="0" y1="-2.032" x2="1.5512" y2="-1.3126" width="0.254" layer="21" curve="49.763022"/>
+<wire x1="-1.7643" y1="-1.0082" x2="0" y2="-2.032" width="0.254" layer="21" curve="60.255215"/>
+<wire x1="-2.032" y1="0" x2="-1.7891" y2="0.9634" width="0.254" layer="51" curve="-28.301701"/>
+<wire x1="-2.032" y1="0" x2="-1.7306" y2="-1.065" width="0.254" layer="51" curve="31.60822"/>
+<pad name="A" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
+<pad name="K" x="1.27" y="0" drill="0.8128" shape="octagon"/>
+<text x="1.905" y="0.381" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="1.905" y="-1.651" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="LED">
+<wire x1="1.27" y1="0" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="1.27" y1="-2.54" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-1.27" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="-2.032" y1="-0.762" x2="-3.429" y2="-2.159" width="0.1524" layer="94"/>
+<wire x1="-1.905" y1="-1.905" x2="-3.302" y2="-3.302" width="0.1524" layer="94"/>
+<text x="3.556" y="-4.572" size="1.778" layer="95" rot="R90">&gt;NAME</text>
+<text x="5.715" y="-4.572" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="C" x="0" y="-5.08" visible="off" length="short" direction="pas" rot="R90"/>
+<pin name="A" x="0" y="2.54" visible="off" length="short" direction="pas" rot="R270"/>
+<polygon width="0.1524" layer="94">
+<vertex x="-3.429" y="-2.159"/>
+<vertex x="-3.048" y="-1.27"/>
+<vertex x="-2.54" y="-1.778"/>
+</polygon>
+<polygon width="0.1524" layer="94">
+<vertex x="-3.302" y="-3.302"/>
+<vertex x="-2.921" y="-2.413"/>
+<vertex x="-2.413" y="-2.921"/>
+</polygon>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TLLR4400" prefix="LED">
+<description>&lt;b&gt;Low Current (2mA) LED 3 mm Tinted Diffused Package&lt;/b&gt; color &lt;b&gt;&lt;font color="darkred"&gt;RED&lt;/font&gt;&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="http://www.farnell.com/datasheets/391100.pdf"&gt; Data sheet&lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="LED" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="LED3MM">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="K"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MF" value="VISHAY SEMICONDUCTOR" constant="no"/>
+<attribute name="OC_FARNELL" value="1612437" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -7196,7 +7280,6 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <part name="VSS9" library="supply1" deviceset="VSS" device=""/>
 <part name="VDD2" library="supply1" deviceset="VDD" device=""/>
 <part name="VSS10" library="supply1" deviceset="VSS" device=""/>
-<part name="VSS11" library="supply1" deviceset="VSS" device=""/>
 <part name="R3" library="resistor" deviceset="R-US_" device="0204/2V" value="220"/>
 <part name="R5" library="resistor" deviceset="R-US_" device="0204/2V" value="220"/>
 <part name="R6" library="resistor" deviceset="R-US_" device="0204/2V" value="220"/>
@@ -7213,6 +7296,16 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <part name="VDD9" library="supply1" deviceset="VDD" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="C11" library="resistor" deviceset="C-US" device="025-025X050" value="22uf"/>
+<part name="R2" library="resistor" deviceset="R-US_" device="0204/2V" value="220"/>
+<part name="LED1" library="led" deviceset="TLLR4400" device=""/>
+<part name="VSS15" library="supply1" deviceset="VSS" device=""/>
+<part name="VSS16" library="supply1" deviceset="VSS" device=""/>
+<part name="VDD10" library="supply1" deviceset="VDD" device=""/>
+<part name="VSS17" library="supply1" deviceset="VSS" device=""/>
+<part name="C12" library="resistor" deviceset="C-US" device="025-024X044" value="0.1"/>
+<part name="VSS11" library="supply1" deviceset="VSS" device=""/>
+<part name="R8" library="resistor" deviceset="R-US_" device="0204/2V" value="10000"/>
+<part name="R9" library="resistor" deviceset="R-US_" device="0204/2V" value="220"/>
 </parts>
 <sheets>
 <sheet>
@@ -7269,17 +7362,16 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <instance part="GND2" gate="1" x="109.22" y="86.36"/>
 <instance part="VDD6" gate="G$1" x="86.36" y="99.06" rot="R90"/>
 <instance part="GND3" gate="1" x="22.86" y="86.36"/>
-<instance part="SV1" gate="1" x="-53.34" y="55.88"/>
+<instance part="SV1" gate="1" x="76.2" y="109.22" rot="R180"/>
 <instance part="PL1" gate="1" x="104.14" y="116.84"/>
 <instance part="PL2" gate="1" x="35.56" y="116.84"/>
 <instance part="SV2" gate="G$1" x="152.4" y="99.06" rot="R180"/>
 <instance part="SV3" gate="G$1" x="152.4" y="114.3" rot="R180"/>
 <instance part="SV4" gate="1" x="-53.34" y="12.7"/>
-<instance part="SV5" gate="1" x="40.64" y="-7.62" rot="R90"/>
+<instance part="SV5" gate="1" x="-88.9" y="81.28"/>
 <instance part="VSS9" gate="G$1" x="-43.18" y="5.08"/>
 <instance part="VDD2" gate="G$1" x="-22.86" y="12.7" rot="R270"/>
 <instance part="VSS10" gate="G$1" x="142.24" y="101.6" rot="R270"/>
-<instance part="VSS11" gate="G$1" x="142.24" y="116.84" rot="R270"/>
 <instance part="R3" gate="G$1" x="10.16" y="93.98"/>
 <instance part="R5" gate="G$1" x="144.78" y="91.44" rot="R270"/>
 <instance part="R6" gate="G$1" x="139.7" y="99.06"/>
@@ -7296,6 +7388,16 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <instance part="VDD9" gate="G$1" x="111.76" y="109.22" rot="R180"/>
 <instance part="GND4" gate="1" x="96.52" y="124.46" rot="R180"/>
 <instance part="C11" gate="G$1" x="-27.94" y="10.16"/>
+<instance part="R2" gate="G$1" x="-71.12" y="53.34" rot="R90"/>
+<instance part="LED1" gate="G$1" x="-71.12" y="45.72"/>
+<instance part="VSS15" gate="G$1" x="-71.12" y="38.1"/>
+<instance part="VSS16" gate="G$1" x="-71.12" y="116.84"/>
+<instance part="VDD10" gate="G$1" x="60.96" y="121.92"/>
+<instance part="VSS17" gate="G$1" x="55.88" y="114.3" rot="R180"/>
+<instance part="C12" gate="G$1" x="116.84" y="129.54"/>
+<instance part="VSS11" gate="G$1" x="116.84" y="121.92"/>
+<instance part="R8" gate="G$1" x="127" y="127" rot="R270"/>
+<instance part="R9" gate="G$1" x="139.7" y="111.76"/>
 </instances>
 <busses>
 </busses>
@@ -7447,11 +7549,22 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <segment>
 <pinref part="R4" gate="G$1" pin="1"/>
 <pinref part="VDD8" gate="G$1" pin="VDD"/>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="127" y1="121.92" x2="127" y2="109.22" width="0.1524" layer="91"/>
+<junction x="127" y="109.22"/>
+<junction x="127" y="121.92"/>
 </segment>
 <segment>
 <pinref part="PL1" gate="1" pin="1"/>
 <pinref part="VDD9" gate="G$1" pin="VDD"/>
 <junction x="111.76" y="111.76"/>
+</segment>
+<segment>
+<pinref part="SV1" gate="1" pin="2"/>
+<wire x1="68.58" y1="114.3" x2="60.96" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="VDD10" gate="G$1" pin="VDD"/>
+<wire x1="60.96" y1="114.3" x2="60.96" y2="119.38" width="0.1524" layer="91"/>
+<junction x="68.58" y="114.3"/>
 </segment>
 </net>
 <net name="VSS" class="0">
@@ -7503,10 +7616,6 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <junction x="144.78" y="101.6"/>
 </segment>
 <segment>
-<pinref part="SV3" gate="G$1" pin="1"/>
-<pinref part="VSS11" gate="G$1" pin="VSS"/>
-</segment>
-<segment>
 <pinref part="C10" gate="G$1" pin="2"/>
 <pinref part="VSS12" gate="G$1" pin="VSS"/>
 </segment>
@@ -7522,6 +7631,29 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <wire x1="-35.56" y1="5.08" x2="-35.56" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="-35.56" y1="5.08" x2="-27.94" y2="5.08" width="0.1524" layer="91"/>
 <junction x="-35.56" y="5.08"/>
+</segment>
+<segment>
+<pinref part="LED1" gate="G$1" pin="C"/>
+<pinref part="VSS15" gate="G$1" pin="VSS"/>
+<junction x="-71.12" y="40.64"/>
+</segment>
+<segment>
+<pinref part="SV5" gate="1" pin="20"/>
+<wire x1="-81.28" y1="106.68" x2="-76.2" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="-76.2" y1="106.68" x2="-76.2" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="-76.2" y1="119.38" x2="-71.12" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="VSS16" gate="G$1" pin="VSS"/>
+<junction x="-81.28" y="106.68"/>
+</segment>
+<segment>
+<pinref part="VSS17" gate="G$1" pin="VSS"/>
+<pinref part="SV1" gate="1" pin="3"/>
+<wire x1="55.88" y1="111.76" x2="68.58" y2="111.76" width="0.1524" layer="91"/>
+<junction x="68.58" y="111.76"/>
+</segment>
+<segment>
+<pinref part="C12" gate="G$1" pin="2"/>
+<pinref part="VSS11" gate="G$1" pin="VSS"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -7549,6 +7681,22 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <junction x="2.54" y="93.98"/>
 <wire x1="2.54" y1="93.98" x2="5.08" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="R3" gate="G$1" pin="1"/>
+<pinref part="SV5" gate="1" pin="19"/>
+<wire x1="-81.28" y1="104.14" x2="-71.12" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="-71.12" y1="104.14" x2="-71.12" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="-71.12" y1="114.3" x2="-25.4" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="114.3" x2="10.16" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="114.3" x2="10.16" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="99.06" x2="2.54" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="99.06" x2="2.54" y2="93.98" width="0.1524" layer="91"/>
+<junction x="-81.28" y="104.14"/>
+<wire x1="-25.4" y1="114.3" x2="-25.4" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="132.08" x2="66.04" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="132.08" x2="66.04" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="SV1" gate="1" pin="1"/>
+<wire x1="66.04" y1="116.84" x2="68.58" y2="116.84" width="0.1524" layer="91"/>
+<junction x="-25.4" y="114.3"/>
+<junction x="68.58" y="116.84"/>
 </segment>
 </net>
 <net name="N$14" class="0">
@@ -7693,8 +7841,8 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <segment>
 <pinref part="IC2" gate="G$1" pin="RB1/AN10/INT1/SCK/SCL"/>
 <wire x1="76.2" y1="55.88" x2="81.28" y2="55.88" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="55.88" x2="81.28" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="C9" gate="G$1" pin="1"/>
+<wire x1="81.28" y1="55.88" x2="81.28" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="81.28" y1="60.96" x2="88.9" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="60.96" x2="121.92" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="60.96" x2="121.92" y2="99.06" width="0.1524" layer="91"/>
@@ -7748,6 +7896,165 @@ PC board mounted ribbon cable connectors (IEC 52141), horizontal&lt;p&gt;
 <wire x1="106.68" y1="106.68" x2="106.68" y2="96.52" width="0.1524" layer="91"/>
 <junction x="106.68" y="96.52"/>
 <junction x="96.52" y="114.3"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="RA0/AN0"/>
+<wire x1="5.08" y1="68.58" x2="-58.42" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="-58.42" y1="68.58" x2="-58.42" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="SV5" gate="1" pin="1"/>
+<wire x1="-58.42" y1="58.42" x2="-71.12" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="-71.12" y1="58.42" x2="-81.28" y2="58.42" width="0.1524" layer="91"/>
+<junction x="-71.12" y="58.42"/>
+<junction x="-81.28" y="58.42"/>
+<junction x="5.08" y="68.58"/>
+</segment>
+</net>
+<net name="N$18" class="0">
+<segment>
+<pinref part="R2" gate="G$1" pin="1"/>
+<pinref part="LED1" gate="G$1" pin="A"/>
+<junction x="-71.12" y="48.26"/>
+</segment>
+</net>
+<net name="N$23" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="RA1/AN1"/>
+<wire x1="5.08" y1="66.04" x2="-48.26" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="-48.26" y1="66.04" x2="-48.26" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="-48.26" y1="71.12" x2="-60.96" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="-60.96" y1="71.12" x2="-60.96" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="SV5" gate="1" pin="2"/>
+<wire x1="-60.96" y1="60.96" x2="-81.28" y2="60.96" width="0.1524" layer="91"/>
+<junction x="-81.28" y="60.96"/>
+<junction x="5.08" y="66.04"/>
+</segment>
+</net>
+<net name="N$26" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="RA2/AN2/VREF-/CVREF"/>
+<wire x1="5.08" y1="63.5" x2="2.54" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="63.5" x2="2.54" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="71.12" x2="-45.72" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="-45.72" y1="71.12" x2="-45.72" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="-45.72" y1="73.66" x2="-63.5" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="-63.5" y1="73.66" x2="-63.5" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="SV5" gate="1" pin="3"/>
+<wire x1="-63.5" y1="63.5" x2="-81.28" y2="63.5" width="0.1524" layer="91"/>
+<junction x="-81.28" y="63.5"/>
+<junction x="5.08" y="63.5"/>
+</segment>
+</net>
+<net name="N$27" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="RA3/AN3/VREF+"/>
+<wire x1="5.08" y1="60.96" x2="0" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="0" y1="60.96" x2="0" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="0" y1="73.66" x2="-43.18" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="-43.18" y1="73.66" x2="-43.18" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="-43.18" y1="76.2" x2="-66.04" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="-66.04" y1="76.2" x2="-66.04" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="SV5" gate="1" pin="4"/>
+<wire x1="-66.04" y1="66.04" x2="-81.28" y2="66.04" width="0.1524" layer="91"/>
+<junction x="-81.28" y="66.04"/>
+<junction x="5.08" y="60.96"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="RA6/OSC2/CLKO"/>
+<wire x1="5.08" y1="38.1" x2="2.54" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="38.1" x2="2.54" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="40.64" x2="-35.56" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="SV5" gate="1" pin="11"/>
+<wire x1="-81.28" y1="83.82" x2="-35.56" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="-35.56" y1="83.82" x2="-35.56" y2="40.64" width="0.1524" layer="91"/>
+<junction x="-81.28" y="83.82"/>
+<junction x="5.08" y="38.1"/>
+</segment>
+</net>
+<net name="N$32" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="5"/>
+<wire x1="68.58" y1="106.68" x2="60.96" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="106.68" x2="60.96" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="83.82" x2="86.36" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="83.82" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="RB6/KBI2/PGC"/>
+<wire x1="86.36" y1="68.58" x2="76.2" y2="68.58" width="0.1524" layer="91"/>
+<junction x="76.2" y="68.58"/>
+<junction x="68.58" y="106.68"/>
+</segment>
+</net>
+<net name="N$29" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="4"/>
+<junction x="68.58" y="109.22"/>
+<wire x1="68.58" y1="109.22" x2="58.42" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="109.22" x2="58.42" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="81.28" x2="83.82" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="RB7/BKI3/PGD"/>
+<wire x1="83.82" y1="71.12" x2="76.2" y2="71.12" width="0.1524" layer="91"/>
+<junction x="76.2" y="71.12"/>
+<wire x1="83.82" y1="81.28" x2="83.82" y2="71.12" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$28" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="RB2/AN8/INT2/VMO"/>
+<wire x1="76.2" y1="58.42" x2="78.74" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="58.42" x2="78.74" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="91.44" x2="83.82" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="91.44" x2="83.82" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="132.08" x2="116.84" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="132.08" x2="127" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="127" y1="132.08" x2="132.08" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="132.08" x2="132.08" y2="111.76" width="0.1524" layer="91"/>
+<junction x="76.2" y="58.42"/>
+<pinref part="C12" gate="G$1" pin="1"/>
+<junction x="116.84" y="132.08"/>
+<pinref part="R8" gate="G$1" pin="1"/>
+<junction x="127" y="132.08"/>
+<pinref part="R9" gate="G$1" pin="1"/>
+<wire x1="134.62" y1="111.76" x2="132.08" y2="111.76" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$31" class="0">
+<segment>
+<pinref part="SV3" gate="G$1" pin="3"/>
+<wire x1="144.78" y1="111.76" x2="147.32" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="R9" gate="G$1" pin="2"/>
+<junction x="144.78" y="111.76"/>
+</segment>
+</net>
+<net name="N$33" class="0">
+<segment>
+<wire x1="-5.08" y1="-2.54" x2="193.04" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="-2.54" x2="193.04" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="132.08" x2="144.78" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="SV3" gate="G$1" pin="1"/>
+<wire x1="144.78" y1="132.08" x2="144.78" y2="116.84" width="0.1524" layer="91"/>
+<junction x="144.78" y="116.84"/>
+<pinref part="IC2" gate="G$1" pin="RC1/T1OSI/ICCP2/!UOE"/>
+<wire x1="5.08" y1="33.02" x2="-5.08" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="-5.08" y1="33.02" x2="-5.08" y2="-2.54" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$34" class="0">
+<segment>
+<wire x1="-2.54" y1="0" x2="190.5" y2="0" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="0" x2="190.5" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="129.54" x2="142.24" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="129.54" x2="142.24" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="114.3" x2="144.78" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="SV3" gate="G$1" pin="2"/>
+<junction x="144.78" y="114.3"/>
+<wire x1="144.78" y1="114.3" x2="147.32" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="-2.54" y1="0" x2="-2.54" y2="30.48" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="RC2/CCP1/P1A"/>
+<wire x1="5.08" y1="30.48" x2="-2.54" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

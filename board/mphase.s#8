@@ -165,190 +165,6 @@
 </deviceset>
 </devicesets>
 </library>
-<library name="microchip">
-<description>&lt;b&gt;Microchip PIC Microcontrollers and other Devices&lt;/b&gt;&lt;p&gt;
-Based on the following sources :
-&lt;ul&gt;
-&lt;li&gt;Microchip Data Book, 1993
-&lt;li&gt;THE EMERGING WORLD STANDARD, 1995/1996
-&lt;li&gt;Microchip, Technical Library CD-ROM, June 1998
-&lt;li&gt;www.microchip.com
-&lt;/ul&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="DIL40">
-<description>&lt;B&gt;Dual In Line&lt;/B&gt;&lt;p&gt;
-package type P</description>
-<wire x1="-25.4" y1="-1.27" x2="-25.4" y2="-6.223" width="0.1524" layer="21"/>
-<wire x1="-25.4" y1="1.27" x2="-25.4" y2="-1.27" width="0.1524" layer="21" curve="-180"/>
-<wire x1="25.4" y1="-6.223" x2="25.4" y2="6.223" width="0.1524" layer="21"/>
-<wire x1="-25.4" y1="6.223" x2="-25.4" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-25.4" y1="6.223" x2="25.4" y2="6.223" width="0.1524" layer="21"/>
-<wire x1="-25.4" y1="-6.223" x2="25.4" y2="-6.223" width="0.1524" layer="21"/>
-<pad name="1" x="-24.13" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="2" x="-21.59" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="3" x="-19.05" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="4" x="-16.51" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="5" x="-13.97" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="6" x="-11.43" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="7" x="-8.89" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="8" x="-6.35" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="9" x="-3.81" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="10" x="-1.27" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="11" x="1.27" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="12" x="3.81" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="13" x="6.35" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="14" x="8.89" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="15" x="11.43" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="16" x="13.97" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="17" x="16.51" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="18" x="19.05" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="19" x="21.59" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="20" x="24.13" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="21" x="24.13" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="22" x="21.59" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="23" x="19.05" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="24" x="16.51" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="25" x="13.97" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="26" x="11.43" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="27" x="8.89" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="28" x="6.35" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="29" x="3.81" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="30" x="1.27" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="31" x="-1.27" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="32" x="-3.81" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="33" x="-6.35" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="34" x="-8.89" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="35" x="-11.43" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="36" x="-13.97" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="37" x="-16.51" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="38" x="-19.05" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="39" x="-21.59" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<pad name="40" x="-24.13" y="7.62" drill="0.8128" shape="long" rot="R90"/>
-<text x="-25.781" y="-6.096" size="1.778" layer="25" ratio="10" rot="R90">&gt;NAME</text>
-<text x="-21.59" y="-2.2352" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
-</package>
-</packages>
-<symbols>
-<symbol name="PIC18F4455_40">
-<wire x1="-33.02" y1="27.94" x2="33.02" y2="27.94" width="0.254" layer="94"/>
-<wire x1="33.02" y1="27.94" x2="33.02" y2="-25.4" width="0.254" layer="94"/>
-<wire x1="33.02" y1="-25.4" x2="-33.02" y2="-25.4" width="0.254" layer="94"/>
-<wire x1="-33.02" y1="-25.4" x2="-33.02" y2="27.94" width="0.254" layer="94"/>
-<text x="-33.02" y="29.21" size="1.778" layer="95">&gt;NAME</text>
-<text x="-33.02" y="-27.94" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="RC7/RX/DT/SDO" x="35.56" y="-10.16" length="short" rot="R180"/>
-<pin name="RD4/SPP4" x="35.56" y="-7.62" length="short" rot="R180"/>
-<pin name="RD5/SPP5/P1B" x="35.56" y="-5.08" length="short" rot="R180"/>
-<pin name="RD6/SPP6/P1C" x="35.56" y="-2.54" length="short" rot="R180"/>
-<pin name="RD7/SPP7/P1D" x="35.56" y="0" length="short" rot="R180"/>
-<pin name="VSS" x="-35.56" y="-2.54" length="short" direction="pwr"/>
-<pin name="VDD" x="-35.56" y="0" length="short" direction="pwr"/>
-<pin name="RB0/AN12/INT0/LFT0/SDI/SDA" x="35.56" y="7.62" length="short" rot="R180"/>
-<pin name="RB1/AN10/INT1/SCK/SCL" x="35.56" y="10.16" length="short" rot="R180"/>
-<pin name="RB2/AN8/INT2/VMO" x="35.56" y="12.7" length="short" rot="R180"/>
-<pin name="RB3/AN9/CCP2/VPO" x="35.56" y="15.24" length="short" rot="R180"/>
-<pin name="RB4/AN11/KBI0/CSSPP" x="35.56" y="17.78" length="short" rot="R180"/>
-<pin name="RB5/KBI1/PGM" x="35.56" y="20.32" length="short" rot="R180"/>
-<pin name="RB6/KBI2/PGC" x="35.56" y="22.86" length="short" rot="R180"/>
-<pin name="RB7/BKI3/PGD" x="35.56" y="25.4" length="short" rot="R180"/>
-<pin name="!MCLR!/VPP/RE3" x="-35.56" y="25.4" length="short" direction="in"/>
-<pin name="RA0/AN0" x="-35.56" y="22.86" length="short"/>
-<pin name="RA1/AN1" x="-35.56" y="20.32" length="short"/>
-<pin name="RA2/AN2/VREF-/CVREF" x="-35.56" y="17.78" length="short"/>
-<pin name="RA3/AN3/VREF+" x="-35.56" y="15.24" length="short"/>
-<pin name="RA4/T0CKI/CIOUT/RCV" x="-35.56" y="12.7" length="short"/>
-<pin name="RA5/AN4/!SS!/HLVDIN/C2OUT" x="-35.56" y="10.16" length="short"/>
-<pin name="RE0/AN5/CK1SPP" x="-35.56" y="7.62" length="short"/>
-<pin name="RE1/AN6/CK2SPP" x="-35.56" y="5.08" length="short"/>
-<pin name="RE2/AN7/OESPP" x="-35.56" y="2.54" length="short"/>
-<pin name="VDD@1" x="35.56" y="5.08" length="short" direction="pwr" rot="R180"/>
-<pin name="VSS@1" x="35.56" y="2.54" length="short" direction="pwr" rot="R180"/>
-<pin name="OSC1/CLKI" x="-35.56" y="-5.08" length="short" direction="in"/>
-<pin name="RA6/OSC2/CLKO" x="-35.56" y="-7.62" length="short" direction="out"/>
-<pin name="RC0/TIOSO/T13CKI" x="-35.56" y="-10.16" length="short"/>
-<pin name="RC1/T1OSI/ICCP2/!UOE" x="-35.56" y="-12.7" length="short"/>
-<pin name="RC2/CCP1/P1A" x="-35.56" y="-15.24" length="short"/>
-<pin name="VUSB" x="-35.56" y="-17.78" length="short"/>
-<pin name="RD0/SPP0" x="-35.56" y="-20.32" length="short"/>
-<pin name="RD1/SPP1" x="-35.56" y="-22.86" length="short"/>
-<pin name="RD2/SPP2" x="35.56" y="-22.86" length="short" rot="R180"/>
-<pin name="RD3/SPP3" x="35.56" y="-20.32" length="short" rot="R180"/>
-<pin name="RC4/D-/VM" x="35.56" y="-17.78" length="short" rot="R180"/>
-<pin name="RC5/D+/VP" x="35.56" y="-15.24" length="short" rot="R180"/>
-<pin name="RC6/TX/CK" x="35.56" y="-12.7" length="short" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="PIC18F4*_40" prefix="IC">
-<description>&lt;b&gt;USB Microcontrollers with nanoWatt Technology&lt;/b&gt; High-Performance, Enhanced Flash, 28/40/44-Pin, &lt;p&gt;
-Source: http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf</description>
-<gates>
-<gate name="G$1" symbol="PIC18F4455_40" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="DIL40">
-<connects>
-<connect gate="G$1" pin="!MCLR!/VPP/RE3" pad="1"/>
-<connect gate="G$1" pin="OSC1/CLKI" pad="13"/>
-<connect gate="G$1" pin="RA0/AN0" pad="2"/>
-<connect gate="G$1" pin="RA1/AN1" pad="3"/>
-<connect gate="G$1" pin="RA2/AN2/VREF-/CVREF" pad="4"/>
-<connect gate="G$1" pin="RA3/AN3/VREF+" pad="5"/>
-<connect gate="G$1" pin="RA4/T0CKI/CIOUT/RCV" pad="6"/>
-<connect gate="G$1" pin="RA5/AN4/!SS!/HLVDIN/C2OUT" pad="7"/>
-<connect gate="G$1" pin="RA6/OSC2/CLKO" pad="14"/>
-<connect gate="G$1" pin="RB0/AN12/INT0/LFT0/SDI/SDA" pad="33"/>
-<connect gate="G$1" pin="RB1/AN10/INT1/SCK/SCL" pad="34"/>
-<connect gate="G$1" pin="RB2/AN8/INT2/VMO" pad="35"/>
-<connect gate="G$1" pin="RB3/AN9/CCP2/VPO" pad="36"/>
-<connect gate="G$1" pin="RB4/AN11/KBI0/CSSPP" pad="37"/>
-<connect gate="G$1" pin="RB5/KBI1/PGM" pad="38"/>
-<connect gate="G$1" pin="RB6/KBI2/PGC" pad="39"/>
-<connect gate="G$1" pin="RB7/BKI3/PGD" pad="40"/>
-<connect gate="G$1" pin="RC0/TIOSO/T13CKI" pad="15"/>
-<connect gate="G$1" pin="RC1/T1OSI/ICCP2/!UOE" pad="16"/>
-<connect gate="G$1" pin="RC2/CCP1/P1A" pad="17"/>
-<connect gate="G$1" pin="RC4/D-/VM" pad="23"/>
-<connect gate="G$1" pin="RC5/D+/VP" pad="24"/>
-<connect gate="G$1" pin="RC6/TX/CK" pad="25"/>
-<connect gate="G$1" pin="RC7/RX/DT/SDO" pad="26"/>
-<connect gate="G$1" pin="RD0/SPP0" pad="19"/>
-<connect gate="G$1" pin="RD1/SPP1" pad="20"/>
-<connect gate="G$1" pin="RD2/SPP2" pad="21"/>
-<connect gate="G$1" pin="RD3/SPP3" pad="22"/>
-<connect gate="G$1" pin="RD4/SPP4" pad="27"/>
-<connect gate="G$1" pin="RD5/SPP5/P1B" pad="28"/>
-<connect gate="G$1" pin="RD6/SPP6/P1C" pad="29"/>
-<connect gate="G$1" pin="RD7/SPP7/P1D" pad="30"/>
-<connect gate="G$1" pin="RE0/AN5/CK1SPP" pad="8"/>
-<connect gate="G$1" pin="RE1/AN6/CK2SPP" pad="9"/>
-<connect gate="G$1" pin="RE2/AN7/OESPP" pad="10"/>
-<connect gate="G$1" pin="VDD" pad="11"/>
-<connect gate="G$1" pin="VDD@1" pad="32"/>
-<connect gate="G$1" pin="VSS" pad="12"/>
-<connect gate="G$1" pin="VSS@1" pad="31"/>
-<connect gate="G$1" pin="VUSB" pad="18"/>
-</connects>
-<technologies>
-<technology name="455">
-<attribute name="MF" value="MICROCHIP" constant="no"/>
-<attribute name="MPN" value="PIC18F4455-I/P" constant="no"/>
-<attribute name="OC_FARNELL" value="9321314" constant="no"/>
-<attribute name="OC_NEWARK" value="05K2028" constant="no"/>
-</technology>
-<technology name="550">
-<attribute name="MF" value="MICROCHIP" constant="no"/>
-<attribute name="MPN" value="PIC18F4550-I/P" constant="no"/>
-<attribute name="OC_FARNELL" value="9321357" constant="no"/>
-<attribute name="OC_NEWARK" value="74K8623" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="con-garry">
 <description>&lt;b&gt;Pin Header Connectors&lt;/b&gt;&lt;p&gt;
 &lt;a href="www.mpe-connector.de"&gt;Menufacturer&lt;/a&gt;&lt;p&gt;
@@ -446,6 +262,190 @@ Source: www.mpe-connector.de / garry_shortform_2012.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="microchip">
+<description>&lt;b&gt;Microchip PIC Microcontrollers and other Devices&lt;/b&gt;&lt;p&gt;
+Based on the following sources :
+&lt;ul&gt;
+&lt;li&gt;Microchip Data Book, 1993
+&lt;li&gt;THE EMERGING WORLD STANDARD, 1995/1996
+&lt;li&gt;Microchip, Technical Library CD-ROM, June 1998
+&lt;li&gt;www.microchip.com
+&lt;/ul&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="DIL40">
+<description>&lt;B&gt;Dual In Line&lt;/B&gt;&lt;p&gt;
+package type P</description>
+<wire x1="-25.4" y1="-1.27" x2="-25.4" y2="-6.223" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="1.27" x2="-25.4" y2="-1.27" width="0.1524" layer="21" curve="-180"/>
+<wire x1="25.4" y1="-6.223" x2="25.4" y2="6.223" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="6.223" x2="-25.4" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="6.223" x2="25.4" y2="6.223" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="-6.223" x2="25.4" y2="-6.223" width="0.1524" layer="21"/>
+<pad name="1" x="-24.13" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="2" x="-21.59" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="3" x="-19.05" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="4" x="-16.51" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="5" x="-13.97" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="6" x="-11.43" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="7" x="-8.89" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="8" x="-6.35" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="9" x="-3.81" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="10" x="-1.27" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="11" x="1.27" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="12" x="3.81" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="13" x="6.35" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="14" x="8.89" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="15" x="11.43" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="16" x="13.97" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="17" x="16.51" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="18" x="19.05" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="19" x="21.59" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="20" x="24.13" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="21" x="24.13" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="22" x="21.59" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="23" x="19.05" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="24" x="16.51" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="25" x="13.97" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="26" x="11.43" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="27" x="8.89" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="28" x="6.35" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="29" x="3.81" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="30" x="1.27" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="31" x="-1.27" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="32" x="-3.81" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="33" x="-6.35" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="34" x="-8.89" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="35" x="-11.43" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="36" x="-13.97" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="37" x="-16.51" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="38" x="-19.05" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="39" x="-21.59" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<pad name="40" x="-24.13" y="7.62" drill="0.8128" shape="long" rot="R90"/>
+<text x="-25.781" y="-6.096" size="1.778" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<text x="-21.59" y="-2.2352" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="PIC18F4455_40">
+<wire x1="-33.02" y1="27.94" x2="33.02" y2="27.94" width="0.254" layer="94"/>
+<wire x1="33.02" y1="27.94" x2="33.02" y2="-25.4" width="0.254" layer="94"/>
+<wire x1="33.02" y1="-25.4" x2="-33.02" y2="-25.4" width="0.254" layer="94"/>
+<wire x1="-33.02" y1="-25.4" x2="-33.02" y2="27.94" width="0.254" layer="94"/>
+<text x="-33.02" y="29.21" size="1.778" layer="95">&gt;NAME</text>
+<text x="-33.02" y="-27.94" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="RC7/RX/DT/SDO" x="35.56" y="-10.16" length="short" rot="R180"/>
+<pin name="RD4/SPP4" x="35.56" y="-7.62" length="short" rot="R180"/>
+<pin name="RD5/SPP5/P1B" x="35.56" y="-5.08" length="short" rot="R180"/>
+<pin name="RD6/SPP6/P1C" x="35.56" y="-2.54" length="short" rot="R180"/>
+<pin name="RD7/SPP7/P1D" x="35.56" y="0" length="short" rot="R180"/>
+<pin name="VSS" x="-35.56" y="-2.54" length="short" direction="pwr"/>
+<pin name="VDD" x="-35.56" y="0" length="short" direction="pwr"/>
+<pin name="RB0/AN12/INT0/LFT0/SDI/SDA" x="35.56" y="7.62" length="short" rot="R180"/>
+<pin name="RB1/AN10/INT1/SCK/SCL" x="35.56" y="10.16" length="short" rot="R180"/>
+<pin name="RB2/AN8/INT2/VMO" x="35.56" y="12.7" length="short" rot="R180"/>
+<pin name="RB3/AN9/CCP2/VPO" x="35.56" y="15.24" length="short" rot="R180"/>
+<pin name="RB4/AN11/KBI0/CSSPP" x="35.56" y="17.78" length="short" rot="R180"/>
+<pin name="RB5/KBI1/PGM" x="35.56" y="20.32" length="short" rot="R180"/>
+<pin name="RB6/KBI2/PGC" x="35.56" y="22.86" length="short" rot="R180"/>
+<pin name="RB7/BKI3/PGD" x="35.56" y="25.4" length="short" rot="R180"/>
+<pin name="!MCLR!/VPP/RE3" x="-35.56" y="25.4" length="short" direction="in"/>
+<pin name="RA0/AN0" x="-35.56" y="22.86" length="short"/>
+<pin name="RA1/AN1" x="-35.56" y="20.32" length="short"/>
+<pin name="RA2/AN2/VREF-/CVREF" x="-35.56" y="17.78" length="short"/>
+<pin name="RA3/AN3/VREF+" x="-35.56" y="15.24" length="short"/>
+<pin name="VDDCORE/VCAP" x="-35.56" y="12.7" length="short"/>
+<pin name="RA5/AN4/!SS!/HLVDIN/C2OUT" x="-35.56" y="10.16" length="short"/>
+<pin name="RE0/AN5/CK1SPP" x="-35.56" y="7.62" length="short"/>
+<pin name="RE1/AN6/CK2SPP" x="-35.56" y="5.08" length="short"/>
+<pin name="RE2/AN7/OESPP" x="-35.56" y="2.54" length="short"/>
+<pin name="VDD@1" x="35.56" y="5.08" length="short" direction="pwr" rot="R180"/>
+<pin name="VSS@1" x="35.56" y="2.54" length="short" direction="pwr" rot="R180"/>
+<pin name="OSC1/CLKI" x="-35.56" y="-5.08" length="short" direction="in"/>
+<pin name="RA6/OSC2/CLKO" x="-35.56" y="-7.62" length="short" direction="out"/>
+<pin name="RC0/TIOSO/T13CKI" x="-35.56" y="-10.16" length="short"/>
+<pin name="RC1/T1OSI/ICCP2/!UOE" x="-35.56" y="-12.7" length="short"/>
+<pin name="RC2/CCP1/P1A" x="-35.56" y="-15.24" length="short"/>
+<pin name="VUSB" x="-35.56" y="-17.78" length="short"/>
+<pin name="RD0/SPP0" x="-35.56" y="-20.32" length="short"/>
+<pin name="RD1/SPP1" x="-35.56" y="-22.86" length="short"/>
+<pin name="RD2/SPP2" x="35.56" y="-22.86" length="short" rot="R180"/>
+<pin name="RD3/SPP3" x="35.56" y="-20.32" length="short" rot="R180"/>
+<pin name="RC4/D-/VM" x="35.56" y="-17.78" length="short" rot="R180"/>
+<pin name="RC5/D+/VP" x="35.56" y="-15.24" length="short" rot="R180"/>
+<pin name="RC6/TX/CK" x="35.56" y="-12.7" length="short" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="PIC18F4*_40" prefix="IC">
+<description>&lt;b&gt;USB Microcontrollers with nanoWatt Technology&lt;/b&gt; High-Performance, Enhanced Flash, 28/40/44-Pin, &lt;p&gt;
+Source: http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf</description>
+<gates>
+<gate name="G$1" symbol="PIC18F4455_40" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DIL40">
+<connects>
+<connect gate="G$1" pin="!MCLR!/VPP/RE3" pad="1"/>
+<connect gate="G$1" pin="OSC1/CLKI" pad="13"/>
+<connect gate="G$1" pin="RA0/AN0" pad="2"/>
+<connect gate="G$1" pin="RA1/AN1" pad="3"/>
+<connect gate="G$1" pin="RA2/AN2/VREF-/CVREF" pad="4"/>
+<connect gate="G$1" pin="RA3/AN3/VREF+" pad="5"/>
+<connect gate="G$1" pin="RA5/AN4/!SS!/HLVDIN/C2OUT" pad="7"/>
+<connect gate="G$1" pin="RA6/OSC2/CLKO" pad="14"/>
+<connect gate="G$1" pin="RB0/AN12/INT0/LFT0/SDI/SDA" pad="33"/>
+<connect gate="G$1" pin="RB1/AN10/INT1/SCK/SCL" pad="34"/>
+<connect gate="G$1" pin="RB2/AN8/INT2/VMO" pad="35"/>
+<connect gate="G$1" pin="RB3/AN9/CCP2/VPO" pad="36"/>
+<connect gate="G$1" pin="RB4/AN11/KBI0/CSSPP" pad="37"/>
+<connect gate="G$1" pin="RB5/KBI1/PGM" pad="38"/>
+<connect gate="G$1" pin="RB6/KBI2/PGC" pad="39"/>
+<connect gate="G$1" pin="RB7/BKI3/PGD" pad="40"/>
+<connect gate="G$1" pin="RC0/TIOSO/T13CKI" pad="15"/>
+<connect gate="G$1" pin="RC1/T1OSI/ICCP2/!UOE" pad="16"/>
+<connect gate="G$1" pin="RC2/CCP1/P1A" pad="17"/>
+<connect gate="G$1" pin="RC4/D-/VM" pad="23"/>
+<connect gate="G$1" pin="RC5/D+/VP" pad="24"/>
+<connect gate="G$1" pin="RC6/TX/CK" pad="25"/>
+<connect gate="G$1" pin="RC7/RX/DT/SDO" pad="26"/>
+<connect gate="G$1" pin="RD0/SPP0" pad="19"/>
+<connect gate="G$1" pin="RD1/SPP1" pad="20"/>
+<connect gate="G$1" pin="RD2/SPP2" pad="21"/>
+<connect gate="G$1" pin="RD3/SPP3" pad="22"/>
+<connect gate="G$1" pin="RD4/SPP4" pad="27"/>
+<connect gate="G$1" pin="RD5/SPP5/P1B" pad="28"/>
+<connect gate="G$1" pin="RD6/SPP6/P1C" pad="29"/>
+<connect gate="G$1" pin="RD7/SPP7/P1D" pad="30"/>
+<connect gate="G$1" pin="RE0/AN5/CK1SPP" pad="8"/>
+<connect gate="G$1" pin="RE1/AN6/CK2SPP" pad="9"/>
+<connect gate="G$1" pin="RE2/AN7/OESPP" pad="10"/>
+<connect gate="G$1" pin="VDD" pad="11"/>
+<connect gate="G$1" pin="VDD@1" pad="32"/>
+<connect gate="G$1" pin="VDDCORE/VCAP" pad="6"/>
+<connect gate="G$1" pin="VSS" pad="12"/>
+<connect gate="G$1" pin="VSS@1" pad="31"/>
+<connect gate="G$1" pin="VUSB" pad="18"/>
+</connects>
+<technologies>
+<technology name="455">
+<attribute name="MF" value="MICROCHIP" constant="no"/>
+<attribute name="MPN" value="PIC18F4455-I/P" constant="no"/>
+<attribute name="OC_FARNELL" value="9321314" constant="no"/>
+<attribute name="OC_NEWARK" value="05K2028" constant="no"/>
+</technology>
+<technology name="550">
+<attribute name="MF" value="MICROCHIP" constant="no"/>
+<attribute name="MPN" value="PIC18F4550-I/P" constant="no"/>
+<attribute name="OC_FARNELL" value="9321357" constant="no"/>
+<attribute name="OC_NEWARK" value="74K8623" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -457,9 +457,9 @@ Source: www.mpe-connector.de / garry_shortform_2012.pdf</description>
 </classes>
 <parts>
 <part name="IC1" library="maxim" deviceset="MAX232" device=""/>
-<part name="IC2" library="microchip" deviceset="PIC18F4*_40" device="" technology="550"/>
 <part name="X1" library="con-garry" deviceset="332-10" device=""/>
 <part name="X2" library="con-garry" deviceset="332-10" device=""/>
+<part name="IC2" library="microchip" deviceset="PIC18F4*_40" device="" technology="455"/>
 </parts>
 <sheets>
 <sheet>
@@ -467,7 +467,6 @@ Source: www.mpe-connector.de / garry_shortform_2012.pdf</description>
 </plain>
 <instances>
 <instance part="IC1" gate="G$1" x="33.02" y="43.18"/>
-<instance part="IC2" gate="G$1" x="99.06" y="43.18"/>
 <instance part="X1" gate="-1" x="25.4" y="99.06"/>
 <instance part="X1" gate="-2" x="45.72" y="99.06"/>
 <instance part="X1" gate="-3" x="25.4" y="96.52"/>
@@ -488,6 +487,7 @@ Source: www.mpe-connector.de / garry_shortform_2012.pdf</description>
 <instance part="X2" gate="-8" x="111.76" y="91.44"/>
 <instance part="X2" gate="-9" x="91.44" y="88.9"/>
 <instance part="X2" gate="-10" x="111.76" y="88.9"/>
+<instance part="IC2" gate="G$1" x="93.98" y="45.72"/>
 </instances>
 <busses>
 </busses>
