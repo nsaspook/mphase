@@ -4,9 +4,8 @@
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/tmr3.h"
 
-#define APP_VERSION_STR "0.8"		//This firmware version
-
-//#define PRODUCTION
+#define APP_VERSION_STR "0.9"		//This firmware version
+#define PRODUCTION
 
 #define SIZE_TxBuffer   64		//MC_command max string length
 #define MC_RX_PKT_SZ    64		//Max receive packet length
