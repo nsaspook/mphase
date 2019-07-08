@@ -17,7 +17,7 @@ uint16_t get_pfb(const char * buf)
 		offset_whole = trunc(offset); // get the whole part with no rounding
 		offset = (offset - offset_whole)*360.0; // extract fractional part for angle offset calc
 		/* need to round and convert data to integer */
-		return(uint16_t) roundf(offset);
+		return ((uint16_t) roundf(offset));
 	} else
 		return(BADNUM);
 }

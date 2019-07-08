@@ -73,6 +73,18 @@
  *	if the serial connection is correct and the servo responds in the expected manner.
  */
 
+typedef struct card {
+	int Valid, Lenght, Offset, Array[16];
+} card;
+
+struct card Card={
+	.Lenght=15,
+	.Offset=1,
+	.Valid=0,
+};
+
+int Buff_In = 0, i;
+
 void main(void)
 {
 	// Initialize the device
@@ -101,6 +113,13 @@ void main(void)
 	// Disable the Peripheral Interrupts
 	//INTERRUPT_PeripheralInterruptDisable();
 
+	for (i = 0; i <= Card.Lenght; i++) {
+		Card.Valid += (unsigned int) (Card.Array[i + Card.Offset * Card.Lenght] == Buff_In);
+	}
+
+	for (i = 0; i <= Card.Lenght; i++) {
+		Card.Valid += (Card.Array[i + Card.Offset * Card.Lenght] == Buff_In) ? 1 : 0;
+	}
 
 	while (true) {
 		APP_Tasks();

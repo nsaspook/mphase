@@ -60,7 +60,7 @@ struct CR_DATA {
 	*angle, *diskmove,
 	*dis, *msg2, *mpoles0, *mphase90, *opmode2,
 	*en, *t35, *pfb,
-	*msg0, *mnumber0, *save_parm,
+	*msg0, *opmode3, *mnumber0, *save_parm,
 	*error,
 	*done,
 	*line1,
@@ -72,8 +72,10 @@ struct CR_DATA {
 };
 
 struct RS_DATA {
-	const char *line_m,
+	const char *line_m, *line_ms,
 	*line_o,
+	*line_b0,
+	*line_b1,
 	*line_s;
 };
 

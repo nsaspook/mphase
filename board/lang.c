@@ -27,6 +27,7 @@ static const struct CR_DATA CrData[] = {
 		.mpoles0 = "MPOLES 0\r\n",
 		.mphase90 = "MPHASE 90\r\n",
 		.opmode2 = "OPMODE 2\r\n",
+		.opmode3 = "OPMODE 3\r\n",
 		.en = "EN\r\n",
 		.t35 = "T 35\r\n",
 		.pfb = "PFB\r\n",
@@ -55,8 +56,11 @@ static const struct CR_DATA CrData[] = {
 static const struct RS_DATA RsData[] = {
 	{
 		.line_m = " MPHASE SAVED %d     \r\n",
+		.line_ms = "MPHASE  %d\r\n",
 		.line_o = "\eO\x01\x02 offset %d",
 		.line_s = "%s",
+		.line_b0 = "remove X6 plug\r\n",
+		.line_b1 = "power cycle spin amp\r\n",
 	},
 	{
 		.line_m = " ",

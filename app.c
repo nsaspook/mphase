@@ -297,9 +297,10 @@ void APP_Tasks(void)
 					BUZZER_OFF;
 
 					clear_MC_port();
-					sprintf(mc_response, rs_text->line_m, offset); // send data to controller
+					sprintf(mc_response, rs_text->line_ms, offset); // send data to controller
 					MC_SendCommand(mc_response, true);
 					MC_SendCommand(cr_text->msg0, true);
+					MC_SendCommand(cr_text->opmode3, true);
 					MC_SendCommand(cr_text->mnumber0, true);
 					MC_SendCommand(cr_text->save_parm, true); // save updated offset angle to controller
 					BUZZER_ON;
@@ -335,6 +336,12 @@ void APP_Tasks(void)
 		break;
 	case APP_DONE:
 		while (true) {
+			sprintf(mc_response, rs_text->line_b0);
+			display_ea_line(mc_response);
+			WaitMs(100);
+			sprintf(mc_response, rs_text->line_b1);
+			display_ea_line(mc_response);
+			WaitMs(1000);
 			sprintf(mc_response, rs_text->line_m, offset);
 			display_ea_line(mc_response);
 			WaitMs(100);
