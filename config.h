@@ -4,7 +4,7 @@
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/tmr3.h"
 
-#define APP_VERSION_STR "1.1"		//This firmware version
+#define APP_VERSION_STR "1.2"		//This firmware version
 #define PRODUCTION
 
 #define SIZE_TxBuffer   64		//MC_command max string length

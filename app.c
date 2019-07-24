@@ -330,6 +330,8 @@ void APP_Tasks(void)
 				display_ea_line(mc_response);
 				sprintf(mc_response, cr_text->line3, __TIME__);
 				display_ea_line(mc_response);
+				sprintf(mc_response, cr_text->line1, cr_text->pressb);
+				display_ea_line(mc_response);
 			}
 			StartTimer(TMR_DIS, DIS_REFRESH_MS);
 		}

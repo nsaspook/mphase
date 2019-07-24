@@ -51,7 +51,7 @@ typedef struct {
 } APP_DATA;
 
 struct CR_DATA {
-	const char *headder, *bootb, *buttonp, *blank,
+	const char *headder, *bootb, *buttonp, *blank, *pressb,
 	*c1, *r1,
 	*c2, *r2,
 	*c3, *r3,

@@ -3,6 +3,7 @@
 static const struct CR_DATA CrData[] = {
 	{
 		.headder = "MCHP Tech MP V",
+		.pressb = "Press BOOT button!",
 		.bootb = "Boot Button Pressed ",
 		.buttonp = "When done press OK  ",
 		.done = "Resolver value SET  ",
