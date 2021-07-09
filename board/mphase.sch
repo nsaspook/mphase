@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.0">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7410,7 +7410,7 @@ Solder type</description>
 <part name="IC1" library="maxim" deviceset="MAX232" device=""/>
 <part name="X1" library="con-garry" deviceset="332-10" device=""/>
 <part name="X2" library="con-garry" deviceset="332-10" device=""/>
-<part name="IC2" library="microchip" deviceset="PIC18F4*_40" device="" technology="455">
+<part name="IC2" library="microchip" deviceset="PIC18F4*_40" device="" technology="455" value="PIC18F45K80">
 <attribute name="MPN" value="PIC18F45K80"/>
 </part>
 <part name="C1" library="resistor" deviceset="C-US" device="025-025X050" value="1uf"/>
@@ -8516,6 +8516,13 @@ Solder type</description>
 <approved hash="102,1,5.08,86.36,VSS,GND,,,,"/>
 <approved hash="201,1,5.08,86.36,VSS,VSS\, GND,,,,"/>
 <approved hash="202,1,5.08,40.64,IC2,OSC1/CLKI,,,,"/>
+<approved hash="113,1,71.1623,108.93,SV1,,,,,"/>
+<approved hash="113,1,104.14,118.4,PL1,,,,,"/>
+<approved hash="113,1,35.56,118.4,PL2,,,,,"/>
+<approved hash="113,1,147.362,97.5004,SV2,,,,,"/>
+<approved hash="113,1,147.362,112.74,SV3,,,,,"/>
+<approved hash="113,1,-48.3023,12.9896,SV4,,,,,"/>
+<approved hash="113,1,-83.8623,84.1096,SV5,,,,,"/>
 </errors>
 </schematic>
 </drawing>
